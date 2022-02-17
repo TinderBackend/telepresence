@@ -40,6 +40,8 @@ import (
 	"github.com/datawire/dlib/dlog"
 )
 
+var ServerURL string
+
 // A SessionService represents a service that should be started together with each daemon session.
 // Can be used when passing in custom commands to start up any resources needed for the commands.
 type SessionService interface {
@@ -311,7 +313,7 @@ func connectMgr(c context.Context, cluster *k8s.Cluster, installID string, svc S
 		return nil, err
 	}
 	grpcAddr := net.JoinHostPort(
-		"svc/traffic-manager."+cluster.GetManagerNamespace(),
+		ServerURL,
 		fmt.Sprint(install.ManagerPortHTTP))
 
 	// First check. Establish connection
