@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
 )
 
 type dnsInterceptor struct {

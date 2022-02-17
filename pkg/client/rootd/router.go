@@ -8,16 +8,16 @@ import (
 
 	"golang.org/x/net/ipv4"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/icmp"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/tcp"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/udp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/icmp"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/tcp"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/udp"
 )
 
 func (s *session) routerWorker(c context.Context) error {

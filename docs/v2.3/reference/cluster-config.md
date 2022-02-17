@@ -81,7 +81,7 @@ configuration is required to acquire a license use selective intercepts.
 
 ### Create a license
 
-1. <ClusterConfig /> 
+1. <ClusterConfig />
 
 2. Generate a new license (if one doesn't already exist) by clicking *Generate New License*.
 

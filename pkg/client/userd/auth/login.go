@@ -17,15 +17,15 @@ import (
 	"github.com/pkg/browser"
 	"golang.org/x/oauth2"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/a8rcloud"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/a8rcloud"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/scout"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/auth/authdata"
 )
 
 const (

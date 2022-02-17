@@ -13,10 +13,10 @@ import (
 
 	"k8s.io/client-go/tools/clientcmd/api"
 
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/routing"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/routing"
 )
 
 func getClusterIPs(cluster *api.Cluster) ([]net.IP, error) {

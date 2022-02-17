@@ -10,8 +10,8 @@ import (
 	"golang.org/x/sys/windows"
 	"golang.zx2c4.com/wireguard/windows/tunnel/winipcfg"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
 )
 
 func GetRoutingTable(ctx context.Context) ([]Route, error) {

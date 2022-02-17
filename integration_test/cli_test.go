@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
 )
 
 type cliSuite struct {

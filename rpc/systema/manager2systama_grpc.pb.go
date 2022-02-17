@@ -4,7 +4,7 @@ package systema
 
 import (
 	context "context"
-	common "github.com/telepresenceio/telepresence/rpc/v2/common"
+	common "github.com/TinderBackend/telepresence/rpc/v2/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

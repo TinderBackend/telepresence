@@ -5,8 +5,8 @@ import (
 	"encoding/binary"
 	"errors"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
 )
 
 // HeaderLen is the length of a TCP header that doesn't have any options

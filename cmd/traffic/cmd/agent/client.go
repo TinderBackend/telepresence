@@ -14,13 +14,13 @@ import (
 	"google.golang.org/grpc"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
 )
 
 func GetAmbassadorCloudConnectionInfo(ctx context.Context, address string) (*rpc.AmbassadorCloudConnection, error) {

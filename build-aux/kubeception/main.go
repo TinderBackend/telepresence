@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 const apiRoot = "https://sw.bakerstreet.io/kubeception/api/klusters/"

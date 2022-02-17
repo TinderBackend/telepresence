@@ -51,10 +51,10 @@ generate: $(tools/go-mkopensource) build-aux/$(shell go env GOVERSION).src.tar.g
 	$(tools/protoc) \
 	  \
 	  --go_out=./rpc \
-	  --go_opt=module=github.com/telepresenceio/telepresence/rpc/v2 \
+	  --go_opt=module=github.com/TinderBackend/telepresence/rpc/v2 \
 	  \
 	  --go-grpc_out=./rpc \
-	  --go-grpc_opt=module=github.com/telepresenceio/telepresence/rpc/v2 \
+	  --go-grpc_opt=module=github.com/TinderBackend/telepresence/rpc/v2 \
 	  \
 	  --proto_path=. \
 	  $$(find ./rpc/ -name '*.proto')
@@ -144,7 +144,7 @@ clobber: clean ## (Build) Remove all build artifacts and tools
 prepare-release: generate ## (Release) Update nescessary files and tag the release (does not push)
 	sed -i.bak "/^### $(patsubst v%,%,$(TELEPRESENCE_VERSION)) (TBD)\$$/s/TBD/$$(date +'%B %-d, %Y')/" CHANGELOG.md
 	rm -f CHANGELOG.md.bak
-	go mod edit -require=github.com/telepresenceio/telepresence/rpc/v2@$(TELEPRESENCE_VERSION)
+	go mod edit -require=github.com/TinderBackend/telepresence/rpc/v2@$(TELEPRESENCE_VERSION)
 	git add CHANGELOG.md go.mod
 	sed -i.bak "s/^version:.*/version: $(patsubst v%,%,$(TELEPRESENCE_VERSION))/" charts/telepresence/Chart.yaml
 	sed -i.bak "s/^appVersion:.*/appVersion: $(patsubst v%,%,$(TELEPRESENCE_VERSION))/" charts/telepresence/Chart.yaml

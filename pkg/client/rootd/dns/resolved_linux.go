@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client/rootd/dbus"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/rootd/dbus"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif"
 )
 
 func (s *Server) tryResolveD(c context.Context, dev *vif.Device, configureDNS func(net.IP, *net.UDPAddr)) error {

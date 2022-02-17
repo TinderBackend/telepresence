@@ -26,17 +26,17 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
+	"github.com/TinderBackend/telepresence/v2/pkg/shellquote"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dexec"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dlib/dtime"
 	"github.com/datawire/dtest"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
-	"github.com/telepresenceio/telepresence/v2/pkg/shellquote"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
 )
 
 const TestUser = "telepresence-test-developer"
@@ -157,7 +157,7 @@ func (s *cluster) ensureExecutable(ctx context.Context, errs chan<- error, wg *s
 		exe += ".exe"
 	}
 	err := Run(ctx, "go", "build", "-ldflags",
-		fmt.Sprintf("-X=github.com/telepresenceio/telepresence/v2/pkg/version.Version=%s", s.testVersion),
+		fmt.Sprintf("-X=github.com/TinderBackend/telepresence/v2/pkg/version.Version=%s", s.testVersion),
 		"-o", filepath.Join("build-output", "bin", exe), "./cmd/telepresence")
 	if err != nil {
 		errs <- err

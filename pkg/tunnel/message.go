@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
 )
 
 type MessageCode byte

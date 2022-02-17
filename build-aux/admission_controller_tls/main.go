@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
 )
 
 // The program creates the crt.pem, key.pem, and ca.pem needed when

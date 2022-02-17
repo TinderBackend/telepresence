@@ -13,11 +13,11 @@ import (
 
 	dns2 "github.com/miekg/dns"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/vif"
 	"github.com/datawire/dlib/dexec"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif"
 )
 
 var errResolveDNotConfigured = errors.New("resolved not configured")

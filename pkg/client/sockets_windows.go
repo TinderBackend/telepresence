@@ -9,7 +9,7 @@ import (
 	"golang.org/x/sys/windows"
 	"google.golang.org/grpc"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/proc"
+	"github.com/TinderBackend/telepresence/v2/pkg/proc"
 )
 
 // The Windows IPC between the CLI and the user and root daemons is based on named pipes rather than

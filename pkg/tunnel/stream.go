@@ -8,8 +8,8 @@ import (
 	"net"
 	"time"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
 )
 
 // Version

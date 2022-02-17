@@ -5,8 +5,8 @@ import (
 	"context"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
 )
 
 func (h *handler) handleStreamControl(ctx context.Context, ctrl tunnel.Message) {

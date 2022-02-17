@@ -12,10 +12,10 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
 )
 
 var podResource = meta.GroupVersionResource{Version: "v1", Group: "", Resource: "pods"}

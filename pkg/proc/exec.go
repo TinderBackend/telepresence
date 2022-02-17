@@ -10,7 +10,7 @@ import (
 	//nolint:depguard // TODO: Switch Run() over to dexec.
 	"os/exec"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/shellquote"
+	"github.com/TinderBackend/telepresence/v2/pkg/shellquote"
 )
 
 // Run will run the given executable with given args and env, wait for it to terminate, and return

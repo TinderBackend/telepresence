@@ -12,7 +12,7 @@ import (
 	"github.com/coreos/go-iptables/iptables"
 	"github.com/sethvargo/go-envconfig"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
 )
 
 const nat = "nat"

@@ -3,7 +3,7 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 )
 
 func LoginCommand() *cobra.Command {

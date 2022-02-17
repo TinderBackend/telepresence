@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 // builtinExtensions is a function instead of a would-be-const var because its result includes the

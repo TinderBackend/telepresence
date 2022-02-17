@@ -17,12 +17,12 @@ import (
 	empty "google.golang.org/protobuf/types/known/emptypb"
 	"gopkg.in/yaml.v2"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/auth/authdata"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 // EnsureLoggedIn ensures that the user is logged in to Ambassador Cloud.  An error is returned if

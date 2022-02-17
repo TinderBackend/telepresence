@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 )
 
 func (s *notConnectedSuite) Test_RootDaemonLogLevel() {

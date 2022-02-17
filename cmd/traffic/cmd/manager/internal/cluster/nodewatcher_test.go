@@ -9,9 +9,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	corev1 "k8s.io/api/core/v1"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/subnet"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/subnet"
 )
 
 var (

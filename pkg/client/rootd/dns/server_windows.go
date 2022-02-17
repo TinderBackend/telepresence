@@ -6,8 +6,8 @@ import (
 	"net"
 	"strings"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/vif"
 	"github.com/datawire/dlib/dgroup"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif"
 )
 
 func (s *Server) Worker(c context.Context, dev *vif.Device, configureDNS func(net.IP, *net.UDPAddr)) error {

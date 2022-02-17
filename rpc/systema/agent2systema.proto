@@ -4,7 +4,7 @@ package telepresence.systema;
 
 import "rpc/manager/manager.proto";
 
-option go_package = "github.com/telepresenceio/telepresence/rpc/v2/systema";
+option go_package = "github.com/TinderBackend/telepresence/rpc/v2/systema";
 
 // Calls from the agent to Ambassador Cloud (System A) are authenticated via API keys per
 // https://www.notion.so/datawire/Telepresence-System-A-API-Key-Integration-c13c4676e9944abfb02713b8517051e3

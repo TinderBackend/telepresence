@@ -9,8 +9,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
 )
 
 type listInfo struct {

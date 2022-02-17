@@ -10,9 +10,9 @@ import (
 	"sync/atomic"
 	"time"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
 )
 
 // The idleDuration controls how long a dialer for a specific proto+from-to address combination remains alive without

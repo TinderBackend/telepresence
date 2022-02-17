@@ -3,7 +3,7 @@ package ip
 import (
 	"testing"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 )
 
 func TestAddress_String(t *testing.T) {

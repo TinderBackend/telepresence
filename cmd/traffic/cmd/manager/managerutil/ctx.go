@@ -3,8 +3,8 @@ package managerutil
 import (
 	"context"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
 )
 
 func WithSessionInfo(ctx context.Context, si *manager.SessionInfo) context.Context {

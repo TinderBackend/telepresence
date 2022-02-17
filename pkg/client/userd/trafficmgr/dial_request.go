@@ -3,7 +3,7 @@ package trafficmgr
 import (
 	"context"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
 )
 
 func (tm *TrafficManager) dialRequestWatcher(ctx context.Context) error {

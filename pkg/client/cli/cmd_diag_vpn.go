@@ -10,10 +10,10 @@ import (
 	"github.com/spf13/cobra"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/scout"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/routing"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/routing"
 )
 
 type vpnDiagInfo struct {

@@ -10,11 +10,11 @@ import (
 
 	"github.com/blang/semver"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/restapi"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/restapi"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
 )
 
 type Forwarder struct {

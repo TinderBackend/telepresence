@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 )
 
 func CommandsToRPC(cmds CommandGroups) *connector.CommandGroups {

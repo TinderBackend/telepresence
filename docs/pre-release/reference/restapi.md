@@ -23,12 +23,12 @@ $ curl -v localhost:9980/healthz
 > Host: localhost:9980
 > User-Agent: curl/7.76.1
 > Accept: */*
-> 
+>
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Date: Fri, 26 Nov 2021 07:06:18 GMT
 < Content-Length: 0
-< 
+<
 * Connection #0 to host localhost left intact
 ```
 
@@ -54,13 +54,13 @@ $ curl -v localhost:9980/consume-here -H 'x-telepresence-caller-intercept-id: 43
 > Accept: */*
 > x-telepresence-caller-intercept-id: 4392d394-100e-4f15-a89b-426012f10e05:apitest
 > foo: bar
-> 
+>
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Content-Type: text/plain
 < Date: Fri, 26 Nov 2021 06:43:28 GMT
 < Content-Length: 4
-< 
+<
 * Connection #0 to host localhost left intact
 true%
 ```

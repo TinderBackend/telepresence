@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 func TestGetInstallMechanism(t *testing.T) {

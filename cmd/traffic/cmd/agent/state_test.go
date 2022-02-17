@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/agent"
+	"github.com/TinderBackend/telepresence/v2/pkg/forwarder"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/agent"
-	"github.com/telepresenceio/telepresence/v2/pkg/forwarder"
 )
 
 const (

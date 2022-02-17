@@ -7,9 +7,9 @@ import (
 	"google.golang.org/grpc"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/common"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
+	"github.com/TinderBackend/telepresence/rpc/v2/common"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 )
 
 func versionCheck(ctx context.Context, daemonType string, daemonBinary string, client interface {

@@ -77,7 +77,7 @@ items:
       - type: bugfix
         title: Check conditions before asking questions
         body: >-
-          User will not be asked to log in or add ingress information when creating an intercept until a check has been 
+          User will not be asked to log in or add ingress information when creating an intercept until a check has been
           made that the intercept is possible.
         docs: reference/intercepts/
       - type: bugfix
@@ -181,7 +181,7 @@ items:
       - type: bugfix
         title: Prevent network recursion
         body: >-
-          The TUN-device will trap failed connection attempts that results in recursive calls back into the TUN-device (may happen when the 
+          The TUN-device will trap failed connection attempts that results in recursive calls back into the TUN-device (may happen when the
           cluster runs in a docker-container on the client).
         docs: reference/routing#connect-recursion
       - type: bugfix

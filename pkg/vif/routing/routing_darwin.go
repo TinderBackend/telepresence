@@ -9,8 +9,8 @@ import (
 	"golang.org/x/net/route"
 	"golang.org/x/sys/unix"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
 )
 
 const findInterfaceRegex = "gateway:\\s+([0-9.]+)\\s+.*interface:\\s+([a-z0-9]+)"

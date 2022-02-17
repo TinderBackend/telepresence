@@ -1,7 +1,7 @@
 syntax = "proto3";
 package telepresence.common;
 
-option go_package = "github.com/telepresenceio/telepresence/rpc/v2/common";
+option go_package = "github.com/TinderBackend/telepresence/rpc/v2/common";
 
 // VersionInfo is the type that both `telepresence daemon` (the super-user
 // daemon) and `telepresence conector` (the normal-user daemon) use
@@ -32,7 +32,7 @@ message VersionInfo {
 
   // Version is a "vSEMVER" string of the product version number.
   string version = 2;
- 
+
   // Executable is the path to the executable for the process.
   string executable = 3;
 }

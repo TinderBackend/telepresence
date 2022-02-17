@@ -13,13 +13,13 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/durationpb"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/watchable"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/internal/watchable"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
 )
 
 type SessionState interface {

@@ -13,10 +13,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
 )
 
 func TestDialSocket(t *testing.T) {

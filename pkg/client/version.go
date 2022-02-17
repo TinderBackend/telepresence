@@ -9,7 +9,7 @@ import (
 
 	"github.com/blang/semver"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 )
 
 // Version returns the version of this executable.

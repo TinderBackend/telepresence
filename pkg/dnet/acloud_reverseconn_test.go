@@ -10,11 +10,11 @@ import (
 	"golang.org/x/net/nettest"
 	"google.golang.org/grpc"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/pkg/dnet"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/pkg/dnet"
 )
 
 type mockCloud struct {

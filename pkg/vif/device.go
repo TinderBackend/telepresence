@@ -4,9 +4,9 @@ import (
 	"context"
 	"net"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/routing"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/routing"
 )
 
 // OpenTun creates a new TUN device and ensures that it is up and running.

@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
 )
 
 // Test_RestartInterceptedPod build belongs to the interceptMountSuite because we want to

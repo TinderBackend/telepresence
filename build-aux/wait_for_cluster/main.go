@@ -10,7 +10,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 func run() error {

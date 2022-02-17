@@ -7,10 +7,10 @@ import (
 
 	"github.com/blang/semver"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/forwarder"
+	"github.com/TinderBackend/telepresence/v2/pkg/restapi"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/forwarder"
-	"github.com/telepresenceio/telepresence/v2/pkg/restapi"
 )
 
 type State interface {

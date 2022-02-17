@@ -1,4 +1,4 @@
-module github.com/telepresenceio/telepresence/v2/pkg/dnet/testdata/mockserver
+module github.com/TinderBackend/telepresence/v2/pkg/dnet/testdata/mockserver
 
 go 1.17
 

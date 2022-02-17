@@ -12,8 +12,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
 )
 
 type multipleInterceptsSuite struct {

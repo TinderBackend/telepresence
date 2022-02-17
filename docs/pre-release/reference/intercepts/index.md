@@ -33,7 +33,7 @@ other HTTP requests through to the regular service.  This allows for
 "personal" intercepts which only intercept traffic tagged as belonging
 to a given developer.
 
-[extensions]: https://pkg.go.dev/github.com/telepresenceio/telepresence/v2@v$version$/pkg/client/cli/extensions
+[extensions]: https://pkg.go.dev/github.com/TinderBackend/telepresence/v2@v$version$/pkg/client/cli/extensions
 [ambassador-agent]: https://github.com/telepresenceio/telepresence/blob/release/v2/pkg/client/cli/extensions/builtin.go#L30-L50
 
 ## Intercept behavior when logged in to Ambassador Cloud
@@ -87,7 +87,7 @@ outside of the service as expected.
 
 Use the `--http-plaintext` flag when doing an intercept when the service in the
 cluster is using TLS in case you want to use plaintext for the communication with the
-process on your local workstation. 
+process on your local workstation.
 
 ## Supported workloads
 

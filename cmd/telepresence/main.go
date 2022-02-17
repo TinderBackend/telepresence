@@ -8,15 +8,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/logging"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/rootd"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/commands"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/trafficmgr"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/logging"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/rootd"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/commands"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/trafficmgr"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 )
 
 func main() {

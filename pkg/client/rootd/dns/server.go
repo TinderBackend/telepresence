@@ -11,13 +11,13 @@ import (
 	"github.com/miekg/dns"
 	"google.golang.org/protobuf/types/known/durationpb"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/daemon"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/daemon"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif"
 )
 
 type Resolver func(ctx context.Context, domain string) []net.IP

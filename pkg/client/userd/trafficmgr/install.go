@@ -18,14 +18,14 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/k8s"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/install/helm"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/k8s"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
-	"github.com/telepresenceio/telepresence/v2/pkg/install/helm"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
 )
 
 type installer struct {

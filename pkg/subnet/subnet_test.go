@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 )
 
 func Test_covers(t *testing.T) {

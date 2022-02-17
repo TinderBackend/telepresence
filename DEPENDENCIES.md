@@ -1,4 +1,4 @@
-The Go module "github.com/telepresenceio/telepresence/v2" incorporates the
+The Go module "github.com/TinderBackend/telepresence/v2" incorporates the
 following Free and Open Source software:
 
     Name                                                                Version                                    License(s)
@@ -107,7 +107,7 @@ following Free and Open Source software:
     github.com/spf13/cobra                                              v1.1.3                                     Apache License 2.0
     github.com/spf13/pflag                                              v1.0.5                                     3-clause BSD license
     github.com/stretchr/testify                                         v1.7.0                                     MIT license
-    github.com/telepresenceio/telepresence/rpc/v2                       (modified)                                 Apache License 2.0
+    github.com/TinderBackend/telepresence/rpc/v2                       (modified)                                 Apache License 2.0
     github.com/xeipuuv/gojsonpointer                                    v0.0.0-20180127040702-4e3ac2762d5f         Apache License 2.0
     github.com/xeipuuv/gojsonreference                                  v0.0.0-20180127040603-bd5ef7bd5415         Apache License 2.0
     github.com/xeipuuv/gojsonschema                                     v1.2.0                                     Apache License 2.0

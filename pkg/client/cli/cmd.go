@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/commands"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/commands"
 )
 
 var help = `Telepresence can connect to a cluster and route all outbound traffic from your

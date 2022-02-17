@@ -17,12 +17,12 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/yaml"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dtest"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
 )
 
 type testcase struct {

@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
 )
 
 // handledConnectionImpl is the intersection of these two interfaces:

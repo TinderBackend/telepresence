@@ -6,7 +6,7 @@ package telepresence.userdaemon;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/telepresenceio/telepresence/rpc/v2/userdaemon";
+option go_package = "github.com/TinderBackend/telepresence/rpc/v2/userdaemon";
 
 service SystemA {
   // ResolveInterceptIngressInfo gets the ingress information that the daemon should use to create the preview url

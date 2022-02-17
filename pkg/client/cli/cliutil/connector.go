@@ -16,10 +16,10 @@ import (
 	grpcStatus "google.golang.org/grpc/status"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/proc"
 	"github.com/datawire/dlib/dgroup"
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/proc"
 )
 
 var ErrNoUserDaemon = errors.New("telepresence user daemon is not running")

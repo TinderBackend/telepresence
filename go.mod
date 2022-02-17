@@ -1,4 +1,4 @@
-module github.com/telepresenceio/telepresence/v2
+module github.com/TinderBackend/telepresence/v2
 
 go 1.17
 
@@ -24,7 +24,7 @@ require (
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.7.0
-	github.com/telepresenceio/telepresence/rpc/v2 v2.5.0-test.1
+	github.com/TinderBackend/telepresence/rpc/v2 v2.5.0-test.1
 	golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c
@@ -154,7 +154,7 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.1.0 // indirect
 )
 
-replace github.com/telepresenceio/telepresence/rpc/v2 => ./rpc
+replace github.com/TinderBackend/telepresence/rpc/v2 => ./rpc
 
 // https://github.com/grpc/grpc-go/pull/4567
 replace google.golang.org/grpc v1.38.0 => github.com/datawire/grpc-go v1.38.0-dev.0.20210626184227-5ef87f395316

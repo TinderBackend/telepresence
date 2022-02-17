@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"unsafe"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
 )
 
 const findInterfaceRegex = "^[0-9.]+( via (?P<gw>[0-9.]+))? dev (?P<dev>[a-z0-9-]+) src (?P<src>[0-9.]+)"

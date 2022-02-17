@@ -8,8 +8,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
 )
 
 func (s *connectedSuite) Test_ManualAgent() {

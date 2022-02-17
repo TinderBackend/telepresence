@@ -8,8 +8,8 @@ import (
 	"github.com/spf13/pflag"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 )
 
 // addPreviewFlags mutates 'flags', adding flags to it such that the flags set the appropriate

@@ -9,7 +9,7 @@ import (
 	"mime"
 	"net/http"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 func getAPIKey(ctx context.Context, creds map[string]string, desc string) (string, error) {

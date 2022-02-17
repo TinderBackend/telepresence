@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
 )
 
 type Datagram interface {

@@ -3,7 +3,7 @@ package integration_test
 import (
 	"time"
 
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
 )
 
 func (s *singleServiceSuite) Test_LocalOnlyIntercept() {

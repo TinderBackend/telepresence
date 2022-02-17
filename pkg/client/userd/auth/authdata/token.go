@@ -5,7 +5,7 @@ import (
 
 	"golang.org/x/oauth2"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
 )
 
 const (

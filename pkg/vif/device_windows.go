@@ -11,12 +11,12 @@ import (
 	"golang.zx2c4.com/wireguard/tun"
 	"golang.zx2c4.com/wireguard/windows/tunnel/winipcfg"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/shellquote"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/routing"
 	"github.com/datawire/dlib/derror"
 	"github.com/datawire/dlib/dexec"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/shellquote"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/routing"
 )
 
 // This device will require that wintun.dll is available to the loader.

@@ -5,7 +5,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
 )
 
 // ambassadorCloudTunnel is the intersection of these two interfaces:

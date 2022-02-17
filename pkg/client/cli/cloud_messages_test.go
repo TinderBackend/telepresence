@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 func newTestContext(t *testing.T) context.Context {

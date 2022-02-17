@@ -6,11 +6,11 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/agent"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/agentinit"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/agent"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/agentinit"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
 )
 
 func doMain(fn func(ctx context.Context, args ...string) error, logLevel string, args ...string) {

@@ -11,11 +11,11 @@ import (
 
 	"github.com/blang/semver"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 func Test_NewUpdateChecker(t *testing.T) {

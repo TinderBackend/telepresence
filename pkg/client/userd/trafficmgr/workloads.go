@@ -15,9 +15,9 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/tools/cache"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/k8s"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/k8s"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
 )
 
 type workloadsAndServicesWatcher struct {

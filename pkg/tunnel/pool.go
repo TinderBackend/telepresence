@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
 )
 
 // RecursionBlocker is implemented by handlers that may experience recursive calls

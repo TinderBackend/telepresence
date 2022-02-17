@@ -17,11 +17,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/k8s"
-	"github.com/telepresenceio/telepresence/v2/pkg/install"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/k8s"
+	"github.com/TinderBackend/telepresence/v2/pkg/install"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 )
 
 type genYAMLInfo struct {

@@ -9,7 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const thisModule = "github.com/telepresenceio/telepresence/v2"
+const thisModule = "github.com/TinderBackend/telepresence/v2"
 
 // Formatter formats log messages for Telepresence.
 type Formatter struct {

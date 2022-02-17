@@ -3,9 +3,9 @@ package logging
 import (
 	"context"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
 )
 
 // ReloadDaemonConfig replaces the current config with one loaded from disk and

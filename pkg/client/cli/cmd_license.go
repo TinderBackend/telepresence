@@ -12,8 +12,8 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/serializer/json"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 )
 
 func LicenseCommand() *cobra.Command {

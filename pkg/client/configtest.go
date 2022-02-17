@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dtest"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 // SetDefaultConfig creates a config that has the registry set correctly.

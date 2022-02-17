@@ -57,7 +57,7 @@ $ TELEPRESENCE_REGISTRY=docker.io/lukeshu make build # use .\build-aux\winmake.b
 [make] TELEPRESENCE_VERSION=v2.3.5-63-ga9c8c660-1626378362
 
 mkdir -p build-output/bin
-CGO_ENABLED=0 go build -trimpath -ldflags=-X=github.com/telepresenceio/telepresence/v2/pkg/version.Version=v2.3.5-63-ga9c8c660-1626378362 -o build-output/bin ./cmd/...
+CGO_ENABLED=0 go build -trimpath -ldflags=-X=github.com/TinderBackend/telepresence/v2/pkg/version.Version=v2.3.5-63-ga9c8c660-1626378362 -o build-output/bin ./cmd/...
 
 if ! docker pull docker.io/lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe; then \
   cd base-image && docker build --pull -t docker.io/lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe . && \
@@ -68,10 +68,10 @@ Digest: sha256:3d557f4abf033990c4c165639e37123bee8c482471b034f53a1cbb407e94d9da
 Status: Image is up to date for lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe
 docker.io/lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe
 sed  -e 's|@TELEPRESENCE_REGISTRY@|docker.io/lukeshu|g'  -e 's|@TELEPRESENCE_BASE_VERSION@|0d118a970c93bb1387fce6bb5638e86eb82d2cbe|g' <.ko.yaml.in >.ko.yaml
-localname=$(GOFLAGS="-ldflags=-X=github.com/telepresenceio/telepresence/v2/pkg/version.Version=v2.3.5-63-ga9c8c660-1626378362 -trimpath" ko publish --local ./cmd/traffic) && \
+localname=$(GOFLAGS="-ldflags=-X=github.com/TinderBackend/telepresence/v2/pkg/version.Version=v2.3.5-63-ga9c8c660-1626378362 -trimpath" ko publish --local ./cmd/traffic) && \
 docker tag "$localname" docker.io/lukeshu/tel2:2.3.5-63-ga9c8c660-1626378362
-2021/07/15 13:46:06 Using base docker.io/lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe for github.com/telepresenceio/telepresence/v2/cmd/traffic
-2021/07/15 13:46:07 Building github.com/telepresenceio/telepresence/v2/cmd/traffic for linux/amd64
+2021/07/15 13:46:06 Using base docker.io/lukeshu/tel2-base:0d118a970c93bb1387fce6bb5638e86eb82d2cbe for github.com/TinderBackend/telepresence/v2/cmd/traffic
+2021/07/15 13:46:07 Building github.com/TinderBackend/telepresence/v2/cmd/traffic for linux/amd64
 2021/07/15 13:46:13 Loading ko.local/traffic-583382724d65cac88dce46a7e0490a6c:b182c8fe7541da86bc26c758648badd534973c27017855f2bdd2cee3d0dd615d
 2021/07/15 13:46:15 Loaded ko.local/traffic-583382724d65cac88dce46a7e0490a6c:b182c8fe7541da86bc26c758648badd534973c27017855f2bdd2cee3d0dd615d
 2021/07/15 13:46:15 Adding tag latest

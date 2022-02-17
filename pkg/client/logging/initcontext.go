@@ -11,10 +11,10 @@ import (
 
 	"github.com/sirupsen/logrus"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
 )
 
 // loggerForTest exposes internals to initcontext_test.go

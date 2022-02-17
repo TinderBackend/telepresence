@@ -10,9 +10,9 @@ import (
 
 	"golang.org/x/sys/unix"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/routing"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/routing"
 )
 
 const devicePath = "/dev/net/tun"

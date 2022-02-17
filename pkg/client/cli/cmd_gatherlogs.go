@@ -14,11 +14,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/scout"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 )
 
 type gatherLogsArgs struct {
@@ -53,7 +53,7 @@ telepresence gather-logs --traffic-agents=None --traffic-manager=False
 telepresence gather-logs --traffic-manager=False --traffic-agents=echo-easy
 
 # Get all logs for a specific pod
-telepresence gather-logs --traffic-manager=False --traffic-agents=echo-easy-6848967857-tw4jw     
+telepresence gather-logs --traffic-manager=False --traffic-agents=echo-easy-6848967857-tw4jw
 
 # Get logs from everything except the daemons
 telepresence gather-logs --daemons=None

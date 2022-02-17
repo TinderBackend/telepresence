@@ -19,17 +19,17 @@ import (
 	"github.com/spf13/cobra"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/extensions"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/proc"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
-	"github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/extensions"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/scout"
-	"github.com/telepresenceio/telepresence/v2/pkg/proc"
 )
 
 type interceptArgs struct {
@@ -830,7 +830,7 @@ func (is *interceptState) writeEnvJSON() error {
 var hostRx = regexp.MustCompile(`^[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9\-]*[a-zA-Z0-9])?)*$`)
 
 const (
-	ingressDesc = `To create a preview URL, telepresence needs to know how requests enter 
+	ingressDesc = `To create a preview URL, telepresence needs to know how requests enter
 	your cluster.  Please %s the ingress to use.`
 	ingressQ1 = `1/4: What's your ingress' IP address?
      You may use an IP address or a DNS name (this is usually a

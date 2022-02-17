@@ -19,16 +19,16 @@ import (
 	"gopkg.in/yaml.v3"
 	corev1 "k8s.io/api/core/v1"
 
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/cluster"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/state"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
+	"github.com/TinderBackend/telepresence/v2/pkg/tunnel"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 	"github.com/datawire/dlib/dlog"
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/internal/cluster"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/internal/state"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
-	"github.com/telepresenceio/telepresence/v2/pkg/tunnel"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
 )
 
 // Clock is the mechanism used by the Manager state to get the current time.

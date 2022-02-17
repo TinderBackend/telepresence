@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/resource"
 
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 )
 
 func TestEnvconfig(t *testing.T) {

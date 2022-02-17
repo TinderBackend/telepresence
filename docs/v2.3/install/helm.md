@@ -15,7 +15,7 @@ helm repo update
 
 ## Install with Helm
 
-When you run the Helm chart, it installs all the components required for the Telepresence Traffic Manager. 
+When you run the Helm chart, it installs all the components required for the Telepresence Traffic Manager.
 
 1. If you are installing the Telepresence Traffic Manager **for the first time on your cluster**, create the `ambassador` namespace in your cluster:
 

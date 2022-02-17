@@ -10,11 +10,11 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/protobuf/types/known/emptypb"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/userdaemon"
+	"github.com/TinderBackend/telepresence/v2/pkg/a8rcloud"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/trafficmgr"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/rpc/v2/userdaemon"
-	"github.com/telepresenceio/telepresence/v2/pkg/a8rcloud"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/trafficmgr"
 )
 
 func (s *service) ResolveIngressInfo(ctx context.Context, req *userdaemon.IngressInfoRequest) (*userdaemon.IngressInfoResponse, error) {

@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/logging"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/logging"
 )
 
 var osHasBTime = true

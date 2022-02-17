@@ -10,11 +10,11 @@ import (
 	"github.com/spf13/pflag"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 	"github.com/datawire/dlib/dcontext"
-	"github.com/telepresenceio/telepresence/rpc/v2/connector"
-	"github.com/telepresenceio/telepresence/rpc/v2/daemon"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
 )
 
 func kubeFlagMap(kubeFlags *pflag.FlagSet) map[string]string {

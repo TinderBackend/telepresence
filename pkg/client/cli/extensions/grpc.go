@@ -9,11 +9,11 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	"github.com/telepresenceio/telepresence/rpc/v2/common"
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/pkg/a8rcloud"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/rpc/v2/common"
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/pkg/a8rcloud"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 )
 
 type SystemACredentials string

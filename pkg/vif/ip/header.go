@@ -9,7 +9,7 @@ import (
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
 )
 
 // A Header provides a common interface for the V4Header and the V6Header

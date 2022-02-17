@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/integration_test/itest"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
 )
 
 func (s *singleServiceSuite) Test_DockerRun() {

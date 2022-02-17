@@ -11,9 +11,9 @@ import (
 	"github.com/blang/semver"
 	"k8s.io/client-go/kubernetes"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
 )
 
 const supportedKubeAPIVersion = "1.17.0"

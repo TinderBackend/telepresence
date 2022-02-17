@@ -17,10 +17,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/ambassador/v2/pkg/metriton"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 func TestInstallID(t *testing.T) {

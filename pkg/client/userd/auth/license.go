@@ -7,7 +7,7 @@ import (
 	"mime"
 	"net/http"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
 )
 
 type LicenseInfo struct {

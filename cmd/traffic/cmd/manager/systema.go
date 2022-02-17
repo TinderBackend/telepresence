@@ -11,11 +11,11 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
+	systemarpc "github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/systema"
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dlog"
-	systemarpc "github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/internal/systema"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/managerutil"
 )
 
 type systemaCredentials struct {

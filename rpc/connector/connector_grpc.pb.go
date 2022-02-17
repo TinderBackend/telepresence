@@ -4,9 +4,9 @@ package connector
 
 import (
 	context "context"
-	common "github.com/telepresenceio/telepresence/rpc/v2/common"
-	manager "github.com/telepresenceio/telepresence/rpc/v2/manager"
-	userdaemon "github.com/telepresenceio/telepresence/rpc/v2/userdaemon"
+	common "github.com/TinderBackend/telepresence/rpc/v2/common"
+	manager "github.com/TinderBackend/telepresence/rpc/v2/manager"
+	userdaemon "github.com/TinderBackend/telepresence/rpc/v2/userdaemon"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

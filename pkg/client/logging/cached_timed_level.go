@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
 )
 
 type cachedTLData struct {

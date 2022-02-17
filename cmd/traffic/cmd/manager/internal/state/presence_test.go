@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/state"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/cmd/traffic/cmd/manager/internal/state"
 )
 
 func TestPresence(t *testing.T) {

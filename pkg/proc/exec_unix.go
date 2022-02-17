@@ -14,8 +14,8 @@ import (
 
 	"golang.org/x/sys/unix"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/shellquote"
 	"github.com/datawire/dlib/dexec"
-	"github.com/telepresenceio/telepresence/v2/pkg/shellquote"
 )
 
 var signalsToForward = []os.Signal{unix.SIGINT, unix.SIGTERM}

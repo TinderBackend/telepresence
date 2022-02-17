@@ -8,9 +8,9 @@ import (
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/ip"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/ip"
 )
 
 type Packet interface {

@@ -9,7 +9,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
 )
 
 func callerPackage(skip int) string {

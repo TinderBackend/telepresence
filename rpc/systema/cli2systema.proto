@@ -4,7 +4,7 @@ package telepresence.systema;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/telepresenceio/telepresence/rpc/v2/systema";
+option go_package = "github.com/TinderBackend/telepresence/rpc/v2/systema";
 
 // Calls from the cli to Ambassador Cloud (System A) are unauthenticated
 // This is because this rpc is (currently) only used to get messages from

@@ -3,7 +3,7 @@ package state
 import (
 	"time"
 
-	rpc "github.com/telepresenceio/telepresence/rpc/v2/manager"
+	rpc "github.com/TinderBackend/telepresence/rpc/v2/manager"
 )
 
 func (s *State) IsPresent(sessionID string) bool {

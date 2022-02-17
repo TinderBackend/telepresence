@@ -9,7 +9,7 @@ import (
 
 	"golang.org/x/net/ipv4"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/vif/buffer"
+	"github.com/TinderBackend/telepresence/v2/pkg/vif/buffer"
 )
 
 var ipID uint32

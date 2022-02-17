@@ -14,7 +14,7 @@ import (
 	"golang.org/x/sys/unix"
 	"google.golang.org/grpc"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/proc"
+	"github.com/TinderBackend/telepresence/v2/pkg/proc"
 )
 
 const (

@@ -13,9 +13,9 @@ import (
 	"github.com/blang/semver"
 	"github.com/spf13/cobra"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
 )
 
 const checkDuration = 24 * time.Hour

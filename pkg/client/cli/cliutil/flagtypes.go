@@ -13,7 +13,7 @@ import (
 
 	"github.com/spf13/pflag"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 )
 
 type Value interface {

@@ -6,7 +6,7 @@ import (
 
 	"golang.org/x/sys/windows"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/shellquote"
+	"github.com/TinderBackend/telepresence/v2/pkg/shellquote"
 )
 
 var signalsToForward = []os.Signal{os.Interrupt}

@@ -9,7 +9,7 @@ package telepresence.manager;
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/telepresenceio/telepresence/rpc/v2/manager";
+option go_package = "github.com/TinderBackend/telepresence/rpc/v2/manager";
 
 // ClientInfo is the self-reported metadata that the on-laptop
 // Telepresence client reports whenever it connects to the in-cluster
@@ -81,7 +81,7 @@ message InterceptSpec {
 
   // Additional mechanism-specific arguments.  This is passed as list
   // of CLI-style --flags.  See the documentation for
-  // github.com/telepresenceio/telepresence/v2/pkg/client/cli/extensions
+  // github.com/TinderBackend/telepresence/v2/pkg/client/cli/extensions
   // for more information about writing an extension descriptor file
   // to control what these values are.
   repeated string mechanism_args = 9;

@@ -14,11 +14,11 @@ import (
 	"google.golang.org/grpc/credentials"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+	"github.com/TinderBackend/telepresence/rpc/v2/systema"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cache"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 	"github.com/datawire/dlib/dtime"
-	"github.com/telepresenceio/telepresence/rpc/v2/systema"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cache"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/cli/cliutil"
 )
 
 const messagesCacheFilename = "cloud-messages.json"

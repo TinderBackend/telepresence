@@ -11,8 +11,8 @@ import (
 	licorev1 "k8s.io/client-go/listers/core/v1"
 	"k8s.io/client-go/tools/cache"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/subnet"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/subnet"
 )
 
 type nodeWatcher struct {

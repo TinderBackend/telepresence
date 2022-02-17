@@ -7,8 +7,8 @@
 package daemon
 
 import (
-	common "github.com/telepresenceio/telepresence/rpc/v2/common"
-	manager "github.com/telepresenceio/telepresence/rpc/v2/manager"
+	common "github.com/TinderBackend/telepresence/rpc/v2/common"
+	manager "github.com/TinderBackend/telepresence/rpc/v2/manager"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"

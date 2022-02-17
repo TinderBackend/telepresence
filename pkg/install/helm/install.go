@@ -10,9 +10,9 @@ import (
 	"helm.sh/helm/v3/pkg/chart"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
 )
 
 const helmDriver = "secrets"

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/ipproto"
+	"github.com/TinderBackend/telepresence/v2/pkg/ipproto"
 )
 
 // A ConnID is a compact and immutable representation of protocol, source IP, source port, destination IP and destination port which

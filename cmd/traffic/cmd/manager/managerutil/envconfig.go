@@ -7,8 +7,8 @@ import (
 	"github.com/sethvargo/go-envconfig"
 	"k8s.io/apimachinery/pkg/api/resource"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/k8sapi"
-	"github.com/telepresenceio/telepresence/v2/pkg/version"
+	"github.com/TinderBackend/telepresence/v2/pkg/k8sapi"
+	"github.com/TinderBackend/telepresence/v2/pkg/version"
 )
 
 type Env struct {

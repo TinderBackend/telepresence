@@ -14,11 +14,11 @@ import (
 
 	"golang.org/x/sys/unix"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/log"
+	"github.com/TinderBackend/telepresence/v2/pkg/matcher"
+	"github.com/TinderBackend/telepresence/v2/pkg/restapi"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/log"
-	"github.com/telepresenceio/telepresence/v2/pkg/matcher"
-	"github.com/telepresenceio/telepresence/v2/pkg/restapi"
 )
 
 // This service is meant for testing the cluster side Telepresence API service.

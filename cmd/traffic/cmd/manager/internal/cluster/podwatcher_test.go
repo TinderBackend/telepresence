@@ -6,8 +6,8 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/telepresenceio/telepresence/v2/pkg/iputil"
+	"github.com/TinderBackend/telepresence/v2/pkg/iputil"
 )
 
 type setKey struct {

@@ -16,15 +16,15 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/oauth2"
 
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dlib/dcontext"
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dhttp"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/pkg/client"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/scout"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/auth"
-	"github.com/telepresenceio/telepresence/v2/pkg/client/userd/auth/authdata"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 type MockSaveTokenWrapper struct {
