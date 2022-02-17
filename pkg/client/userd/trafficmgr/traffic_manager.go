@@ -40,6 +40,8 @@ import (
 	"github.com/datawire/dlib/dlog"
 )
 
+// ServerURL is a URL pointing to the traffic manager server. The address format is
+// "[objkind/]objname[.objnamespace]:port" e.g. svc/recsv2.edward-owens.
 var ServerURL string
 
 // A SessionService represents a service that should be started together with each daemon session.
