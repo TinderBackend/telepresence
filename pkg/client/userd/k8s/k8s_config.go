@@ -3,7 +3,7 @@ package k8s
 import (
 	"context"
 	"encoding/json"
-
+	"github.com/TinderBackend/telepresence/v2/pkg/ignisconfig"
 	"github.com/spf13/pflag"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -136,6 +136,8 @@ func NewConfig(c context.Context, flagMap map[string]string) (*Config, error) {
 	if k.kubeconfigExtension.Manager.Namespace == "" {
 		k.kubeconfigExtension.Manager.Namespace = client.GetEnv(c).ManagerNamespace
 	}
+
+	k.AlsoProxy = append(k.AlsoProxy, ignisconfig.DefaultAlsoProxy...)
 
 	return k, nil
 }

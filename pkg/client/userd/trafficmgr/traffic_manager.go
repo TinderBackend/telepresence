@@ -3,6 +3,7 @@ package trafficmgr
 import (
 	"context"
 	"fmt"
+	"github.com/TinderBackend/telepresence/v2/pkg/ignisconfig"
 	"net"
 	"net/url"
 	"os"
@@ -39,10 +40,6 @@ import (
 	"github.com/datawire/dlib/dgroup"
 	"github.com/datawire/dlib/dlog"
 )
-
-// ServerURL is a URL pointing to the traffic manager server. The address format is
-// "[objkind/]objname[.objnamespace]:port" e.g. svc/recsv2.edward-owens.
-var ServerURL string
 
 // A SessionService represents a service that should be started together with each daemon session.
 // Can be used when passing in custom commands to start up any resources needed for the commands.
@@ -315,7 +312,7 @@ func connectMgr(c context.Context, cluster *k8s.Cluster, installID string, svc S
 		return nil, err
 	}
 	grpcAddr := net.JoinHostPort(
-		ServerURL,
+		ignisconfig.ServerURL,
 		fmt.Sprint(install.ManagerPortHTTP))
 
 	// First check. Establish connection
