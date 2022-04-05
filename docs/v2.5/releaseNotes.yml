@@ -36,7 +36,7 @@ docDescription: >-
   environments, access to instantaneous feedback loops, and highly
   customizable development environments.
 
-changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/TinderBackend/telepresence/blob/$branch$/CHANGELOG.md
 
 items:
   - version: 2.5.4
@@ -159,7 +159,7 @@ items:
           Telepresence now uses Github Actions for doing unit and integration testing. It is
           now easier for contributors to run tests on PRs since maintainers can add an
           "ok to test" label to PRs (including from forks) to run integration tests.
-        docs: https://github.com/telepresenceio/telepresence/actions
+        docs: https://github.com/TinderBackend/telepresence/actions
         image: telepresence-2.4.10-actions.png
       - type: bugfix
         title: Check conditions before asking questions
@@ -287,7 +287,7 @@ items:
           will prompt the user to log in again to get a new token. Previously,
           the user had to <code> telepresence quit </code> and <code> telepresence logout </code>
           to get a new token.
-        docs: https://github.com/telepresenceio/telepresence/issues/2062
+        docs: https://github.com/TinderBackend/telepresence/issues/2062
   - version: 2.4.6
     date: "2021-11-02"
     notes:

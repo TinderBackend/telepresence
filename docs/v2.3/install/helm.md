@@ -29,7 +29,7 @@ When you run the Helm chart, it installs all the components required for the Tel
    helm install traffic-manager --namespace ambassador datawire/telepresence
    ```
 
-For more details on what the Helm chart installs and what can be configured, take a look at the Helm chart [README](https://github.com/telepresenceio/telepresence/tree/release/v2/charts/telepresence).
+For more details on what the Helm chart installs and what can be configured, take a look at the Helm chart [README](https://github.com/TinderBackend/telepresence/tree/release/v2/charts/telepresence).
 
 ### Install into custom namespace
 

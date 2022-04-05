@@ -4,7 +4,7 @@
 
 **Note** that installing the Traffic Manager through Helm will prevent `telepresence connect` from ever upgrading it. If you wish to upgrade a Traffic Manager that was installed via the Helm chart, please see the steps [below](#upgrading-the-traffic-manager)
 
-For more details on what the Helm chart installs and what can be configured, see the Helm chart [README](https://github.com/telepresenceio/telepresence/tree/release/v2/charts/telepresence).
+For more details on what the Helm chart installs and what can be configured, see the Helm chart [README](https://github.com/TinderBackend/telepresence/tree/release/v2/charts/telepresence).
 
 ## Before you begin
 
@@ -19,7 +19,7 @@ helm repo update
 
 ## Install with Helm
 
-When you run the Helm chart, it installs all the components required for the Telepresence Traffic Manager. 
+When you run the Helm chart, it installs all the components required for the Telepresence Traffic Manager.
 
 1. If you are installing the Telepresence Traffic Manager **for the first time on your cluster**, create the `ambassador` namespace in your cluster:
 

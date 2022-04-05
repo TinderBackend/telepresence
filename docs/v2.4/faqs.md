@@ -117,7 +117,7 @@ More authentication mechanisms and identity provider support will be added soon.
 
 ** Is Telepresence open source?**
 
-Yes it is! You can find its source code on [GitHub](https://github.com/telepresenceio/telepresence).
+Yes it is! You can find its source code on [GitHub](https://github.com/TinderBackend/telepresence).
 
 ** How do I share my feedback on Telepresence?**
 

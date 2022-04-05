@@ -34,7 +34,7 @@ other HTTP requests through to the regular service.  This allows for
 to a given developer.
 
 [extensions]: https://pkg.go.dev/github.com/TinderBackend/telepresence/v2@v$version$/pkg/client/cli/extensions
-[ambassador-agent]: https://github.com/telepresenceio/telepresence/blob/release/v2/pkg/client/cli/extensions/builtin.go#L30-L50
+[ambassador-agent]: https://github.com/TinderBackend/telepresence/blob/release/v2/pkg/client/cli/extensions/builtin.go#L30-L50
 
 ## Intercept behavior when logged in to Ambassador Cloud
 

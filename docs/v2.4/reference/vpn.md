@@ -76,7 +76,7 @@ And show you the results of the test:
 
 Please see https://www.telepresence.io/docs/latest/reference/vpn for more info on these corrective actions, as well as examples
 
-Still having issues? Please create a new github issue at https://github.com/telepresenceio/telepresence/issues/new?template=Bug_report.md
+Still having issues? Please create a new github issue at https://github.com/TinderBackend/telepresence/issues/new?template=Bug_report.md
  Please make sure to add the following to your issue:
  * Run `telepresence loglevel debug`, try to connect, then run `telepresence gather_logs`. It will produce a zipfile that you should attach to the issue.
  * Which VPN client are you using?

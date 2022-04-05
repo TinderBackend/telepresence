@@ -2,9 +2,9 @@
 
 [<img src="https://cncf-branding.netlify.app/img/projects/telepresence/horizontal/color/telepresence-horizontal-color.png" width="80"/>](https://cncf-branding.netlify.app/img/projects/telepresence/horizontal/color/telepresence-horizontal-color.png)
 
-Telepresence gives developers infinite scale development environments for Kubernetes. 
+Telepresence gives developers infinite scale development environments for Kubernetes.
 
-Website: [https://www.telepresence.io](https://www.telepresence.io)  
+Website: [https://www.telepresence.io](https://www.telepresence.io)
 Slack: [Discuss](https://datawire-oss.slack.com/signup#/domain-signup)
 
 **With Telepresence:**
@@ -24,11 +24,11 @@ A few quick ways to start using Telepresence
 
 * **Telepresence Quick Start:** [Quick Start](https://www.getambassador.io/docs/telepresence/latest/quick-start/)
 * **Install Telepresence:** [Install](https://www.getambassador.io/docs/telepresence/latest/install/)
-* **Contributor's Guide:** [Guide](https://github.com/telepresenceio/telepresence/blob/release/v2/DEVELOPING.md)
-* **Meetings:** Check out our community [meeting schedule](https://github.com/telepresenceio/telepresence/blob/release/v2/MEETING_SCHEDULE.md) for opportunities to interact with Telepresence developers
+* **Contributor's Guide:** [Guide](https://github.com/TinderBackend/telepresence/blob/release/v2/DEVELOPING.md)
+* **Meetings:** Check out our community [meeting schedule](https://github.com/TinderBackend/telepresence/blob/release/v2/MEETING_SCHEDULE.md) for opportunities to interact with Telepresence developers
 
 ## Documentation
-Telepresence documentation is available on the Ambassador Labs webside:  
+Telepresence documentation is available on the Ambassador Labs webside:
 [Documentation](https://www.getambassador.io/docs/telepresence/)
 
 ## Telepresence 2

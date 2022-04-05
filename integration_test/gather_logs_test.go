@@ -12,9 +12,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/TinderBackend/telepresence/integration_test/itest"
+	"github.com/TinderBackend/telepresence/pkg/filelocation"
 	"github.com/datawire/dlib/dlog"
-	"github.com/telepresenceio/telepresence/v2/integration_test/itest"
-	"github.com/telepresenceio/telepresence/v2/pkg/filelocation"
 )
 
 func (s *multipleInterceptsSuite) TestGatherLogs_AllLogs() {

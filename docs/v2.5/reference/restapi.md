@@ -3,7 +3,7 @@
 Telepresence can run a RESTful API server on the local host, both on the local workstation and in a pod that contains a `traffic-agent`. The server currently has two endpoints. The standard `healthz` endpoint and the `consume-here` endpoint.
 
 ## Enabling the server
-The server is enabled by setting the `telepresenceAPI.port` to a valid port number in the [Telepresence Helm Chart](https://github.com/telepresenceio/telepresence/tree/release/v2/charts/telepresence). The values may be passed  explicitly to Helm during install, or configured using the [Telepresence Config](../config#restful-api-server) to impact an auto-install.
+The server is enabled by setting the `telepresenceAPI.port` to a valid port number in the [Telepresence Helm Chart](https://github.com/TinderBackend/telepresence/tree/release/v2/charts/telepresence). The values may be passed  explicitly to Helm during install, or configured using the [Telepresence Config](../config#restful-api-server) to impact an auto-install.
 
 ## Querying the server
 On the cluster's side, it's the `traffic-agent` of potentially intercepted pods that runs the server. The server can be accessed using `http://localhost:<TELEPRESENCE_API_PORT>/<some endpoint>` from the application container. Telepresence ensures that the container has the `TELEPRESENCE_API_PORT` environment variable set when the `traffic-agent` is installed. On the workstation, it is the `user-daemon` that runs the server. It uses the `TELEPRESENCE_API_PORT` that is conveyed in the environment of the intercept. This means that the server can be accessed the exact same way locally, provided that the environment is propagated correctly to the interceptor process.
@@ -30,12 +30,12 @@ $ curl -v localhost:9980/healthz
 > Host: localhost:9980
 > User-Agent: curl/7.76.1
 > Accept: */*
-> 
+>
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Date: Fri, 26 Nov 2021 07:06:18 GMT
 < Content-Length: 0
-< 
+<
 * Connection #0 to host localhost left intact
 ```
 
@@ -54,13 +54,13 @@ $ curl -v localhost:9980/consume-here?path=/api -H 'x-telepresence-caller-interc
 > Accept: */*
 > x: y
 > x-telepresence-caller-intercept-id: 4392d394-100e-4f15-a89b-426012f10e05:apitest
-> 
+>
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Content-Type: application/json
 < Date: Fri, 26 Nov 2021 06:43:28 GMT
 < Content-Length: 4
-< 
+<
 * Connection #0 to host localhost left intact
 true
 ```

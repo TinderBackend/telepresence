@@ -185,7 +185,7 @@ Users will now be able to use preview intercepts with the
 cannot be used without enabling direct communication with Ambassador
 Cloud, as Ambassador Cloud is essential to their operation.
 
-If using Helm to install the server-side components, see the chart's [README](https://github.com/telepresenceio/telepresence/tree/release/v2/charts/telepresence) to learn how to configure the image registry and license secret.
+If using Helm to install the server-side components, see the chart's [README](https://github.com/TinderBackend/telepresence/tree/release/v2/charts/telepresence) to learn how to configure the image registry and license secret.
 
 Have clients use the [skipLogin](../config/#cloud) key to ensure the cli knows it is operating in an
 air-gapped environment.

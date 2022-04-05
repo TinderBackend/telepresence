@@ -36,7 +36,7 @@ docDescription: >-
   environments, access to instantaneous feedback loops, and highly
   customizable development environments.
 
-changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/TinderBackend/telepresence/blob/$branch$/CHANGELOG.md
 
 items:
 

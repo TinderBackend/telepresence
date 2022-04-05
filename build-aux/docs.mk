@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # This file deals with syncing docs between the code and telepresenceio/docs repo.
-# This is the same file as https://github.com/telepresenceio/telepresence.io/blob/master/Makefile
+# This is the same file as https://github.com/TinderBackend/telepresence.io/blob/master/Makefile
 # and should probably stay that way.
 
 define nl
