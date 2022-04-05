@@ -13,18 +13,11 @@ import (
 	"google.golang.org/grpc/status"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
-<<<<<<< HEAD
-	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
-	"github.com/TinderBackend/telepresence/v2/pkg/client"
-	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
-	"github.com/TinderBackend/telepresence/v2/pkg/proc"
-=======
 	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
 	"github.com/TinderBackend/telepresence/v2/pkg/client"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/TinderBackend/telepresence/v2/pkg/proc"
->>>>>>> upstream/release/v2
 )
 
 var ErrNoNetwork = errors.New("telepresence network is not established")

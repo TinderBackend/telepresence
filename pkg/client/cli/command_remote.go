@@ -8,16 +8,10 @@ import (
 	"github.com/spf13/cobra"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
-<<<<<<< HEAD
-	"github.com/TinderBackend/telepresence/rpc/v2/connector"
-	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
-=======
 	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/commands"
->>>>>>> upstream/release/v2
 )
 
 func getRemoteCommands(ctx context.Context) (groups cliutil.CommandGroups, err error) {

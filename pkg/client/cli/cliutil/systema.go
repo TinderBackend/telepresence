@@ -20,19 +20,11 @@ import (
 	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 	"github.com/TinderBackend/telepresence/v2/pkg/client"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
-	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
-	"github.com/datawire/dlib/dexec"
-<<<<<<< HEAD
-=======
-	"github.com/datawire/dlib/dlog"
-	"github.com/TinderBackend/telepresence/rpc/v2/connector"
-	"github.com/TinderBackend/telepresence/v2/pkg/client"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
->>>>>>> upstream/release/v2
+	"github.com/datawire/dlib/dexec"
+	"github.com/datawire/dlib/dlog"
 )
 
 // EnsureLoggedIn ensures that the user is logged in to Ambassador Cloud.  An error is returned if

@@ -15,19 +15,11 @@ import (
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 
-<<<<<<< HEAD
-	"github.com/TinderBackend/telepresence/rpc/v2/manager"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
-	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
-	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
-=======
 	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 	"github.com/TinderBackend/telepresence/v2/pkg/client"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
->>>>>>> upstream/release/v2
 )
 
 type gatherLogsArgs struct {
