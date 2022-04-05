@@ -7,6 +7,6 @@
 	remote = https://github.com/telepresenceio/docs
 	branch = release/v2.1
 	commit = df5ad91a746314c396f069374d1e37bbae9d9204
-	parent = f976c848f5eb8f2a5bb98a5764b8b2bca50fc5a6
+	parent = 33076f7da1626646051da27275e14658e5c68657
 	method = merge
 	cmdver = 0.4.3

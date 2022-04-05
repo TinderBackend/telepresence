@@ -13,12 +13,21 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
 
+<<<<<<< HEAD
 	"github.com/TinderBackend/telepresence/rpc/v2/manager"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+=======
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+>>>>>>> upstream/release/v2
 )
 
 type gatherLogsArgs struct {
@@ -60,7 +69,7 @@ telepresence gather-logs --daemons=None
 `,
 
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return gl.gatherLogs(cmd.Context(), cmd, cmd.OutOrStdout(), cmd.ErrOrStderr())
+			return gl.gatherLogs(cmd.Context(), cmd)
 		},
 	}
 	flags := cmd.Flags()
@@ -83,7 +92,7 @@ type anonymizer struct {
 }
 
 // gatherLogs gets the logs from the daemons (daemon + connector) and creates a zip
-func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, stdout, stderr io.Writer) error {
+func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command) error {
 	scout := scout.NewReporter(ctx, "cli")
 	scout.Start(ctx)
 	defer scout.Close()
@@ -104,7 +113,7 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 		if err != nil {
 			return errcat.User.New(err)
 		}
-		gl.outputFile = filepath.Join(pwd, "telepresence_logs.zip", pwd)
+		gl.outputFile = filepath.Join(pwd, "telepresence_logs.zip")
 	} else if !strings.HasSuffix(gl.outputFile, ".zip") {
 		return errcat.User.New("output file must end in .zip")
 	}
@@ -117,7 +126,7 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 	}
 	defer func() {
 		if err := os.RemoveAll(exportDir); err != nil {
-			fmt.Fprintf(stderr, "Failed to remove temp directory %s: %s", exportDir, err)
+			fmt.Fprintf(cmd.ErrOrStderr(), "Failed to remove temp directory %s: %s", exportDir, err)
 		}
 	}()
 
@@ -145,6 +154,43 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 	scout.SetMetadatum(ctx, "anonymized_logs", gl.anon)
 	scout.Report(ctx, "used_gather_logs")
 
+	// Since getting the logs from k8s requires the connector, let's only do this
+	// work if we know the user wants to get logs from k8s.
+	// We gather those logs before we gather the connector.log so that problems that
+	// may occur during that process will be included in the connector.log
+	if gl.trafficManager || gl.trafficAgents != "None" {
+		// To get logs from the components in the kubernetes cluster, we ask the
+		// traffic-manager.
+		rq := &connector.LogsRequest{
+			TrafficManager: gl.trafficManager,
+			Agents:         gl.trafficAgents,
+			GetPodYaml:     gl.podYaml,
+		}
+		err = withConnector(cmd, false, nil, func(_ context.Context, cs *connectorState) error {
+			var opts []grpc.CallOption
+			cfg := client.GetConfig(ctx)
+			if !cfg.Grpc.MaxReceiveSize.IsZero() {
+				if mz, ok := cfg.Grpc.MaxReceiveSize.AsInt64(); ok {
+					opts = append(opts, grpc.MaxCallRecvMsgSize(int(mz)))
+				}
+			}
+			lr, err := cs.userD.GatherLogs(ctx, rq, opts...)
+			if err != nil {
+				return err
+			}
+			if err := writeResponseToFiles(lr, anonymizer, exportDir, gl.anon); err != nil {
+				return err
+			}
+			return nil
+		})
+		// We let the user know we were unable to get logs from the kubernetes components,
+		// and why, but this shouldn't block the command returning successful with the logs
+		// it was able to get.
+		if err != nil {
+			fmt.Fprintf(cmd.ErrOrStderr(), "error getting logs from kubernetes components: %s\n", err)
+		}
+	}
+
 	// Get all logs from the logDir that match the daemons the user cares about.
 	logFiles, err := os.ReadDir(logDir)
 	if err != nil {
@@ -161,7 +207,7 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 				// The cli.log is often empty, so this check is relevant.
 				empty, err := isEmpty(srcFile)
 				if err != nil {
-					fmt.Fprintf(stderr, "failed stat on %s: %s\n", entry.Name(), err)
+					fmt.Fprintf(cmd.ErrOrStderr(), "failed stat on %s: %s\n", entry.Name(), err)
 					continue
 				}
 				if empty {
@@ -171,44 +217,10 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 				if err := copyFiles(dstFile, srcFile); err != nil {
 					// We don't want to fail / exit abruptly if we can't copy certain
 					// files, but we do want the user to know we were unsuccessful
-					fmt.Fprintf(stderr, "failed exporting %s: %s\n", entry.Name(), err)
+					fmt.Fprintf(cmd.ErrOrStderr(), "failed exporting %s: %s\n", entry.Name(), err)
 					continue
 				}
 			}
-		}
-	}
-
-	// Since getting the logs from k8s requires the connector, let's only do this
-	// work if we know the user wants to get logs from k8s.
-	if gl.trafficManager || gl.trafficAgents != "None" {
-		// To get logs from the components in the kubernetes cluster, we ask the
-		// traffic-manager.
-		rq := &manager.GetLogsRequest{
-			TrafficManager: gl.trafficManager,
-			Agents:         gl.trafficAgents,
-			GetPodYaml:     gl.podYaml,
-		}
-		err = withConnector(cmd, false, nil, func(_ context.Context, _ *connectorState) error {
-			err = cliutil.WithManager(ctx, func(ctx context.Context, managerClient manager.ManagerClient) error {
-				lr, err := managerClient.GetLogs(ctx, rq)
-				if err != nil {
-					return err
-				}
-				if err := writeResponseToFiles(lr, anonymizer, exportDir, gl.anon); err != nil {
-					return err
-				}
-				return nil
-			})
-			if err != nil {
-				return err
-			}
-			return nil
-		})
-		// We let the user know we were unable to get logs from the kubernetes components,
-		// and why, but this shouldn't block the command returning successful with the logs
-		// it was able to get.
-		if err != nil {
-			fmt.Fprintf(stdout, "error getting logs from kubernetes components: %s\n", err)
 		}
 	}
 
@@ -227,8 +239,8 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 		fullFileName := filepath.Join(exportDir, entry.Name())
 		// anonymize the log if necessary
 		if gl.anon {
-			if err := anonymizeLog(stdout, fullFileName, anonymizer); err != nil {
-				fmt.Fprintf(stdout, "error anonymizing %s: %s\n", fullFileName, err)
+			if err := anonymizeLog(fullFileName, anonymizer); err != nil {
+				fmt.Fprintf(cmd.ErrOrStderr(), "error anonymizing %s: %s\n", fullFileName, err)
 			}
 		}
 		files[i] = fullFileName
@@ -238,13 +250,13 @@ func (gl *gatherLogsArgs) gatherLogs(ctx context.Context, cmd *cobra.Command, st
 		return errcat.User.New(err)
 	}
 
-	fmt.Fprintf(stdout, "Logs have been exported to %s\n", gl.outputFile)
+	fmt.Fprintf(cmd.OutOrStdout(), "Logs have been exported to %s\n", gl.outputFile)
 	return nil
 }
 
 // writeResponseToFiles contains the logic for parsing the response from the
 // manager and writing its components into logical files.
-func writeResponseToFiles(lr *manager.LogsResponse, anonymizer *anonymizer, exportDir string, anonymize bool) error {
+func writeResponseToFiles(lr *connector.LogsResponse, anonymizer *anonymizer, exportDir string, anonymize bool) error {
 	createFileWithContent := func(fileName, content string) error {
 		fd, err := os.Create(fileName)
 		if err != nil {
@@ -308,7 +320,7 @@ func copyFiles(dstFile, srcFile string) error {
 }
 
 // zipFiles creates a zip file with the contents of all the files passed in.
-// If some of the files do not exist, it will include that in the error message
+// If some files do not exist, it will include that in the error message,
 // but it will still create a zip file with as many files as it can.
 func zipFiles(files []string, zipFileName string) error {
 	zipFile, err := os.Create(zipFileName)
@@ -430,7 +442,7 @@ func getPodName(podName string, anon bool, anonymizer *anonymizer) string {
 // anonymizeLog is a helper function that replaces the namespace + podName
 // used in the log with its anonymized version, provided by the anonymizer.
 // It overwrites the file with the anonymized version.
-func anonymizeLog(stdout io.Writer, logFile string, anonymizer *anonymizer) error {
+func anonymizeLog(logFile string, anonymizer *anonymizer) error {
 	// Read the contents we are going to overwrite from the file
 	content, err := os.ReadFile(logFile)
 	if err != nil {

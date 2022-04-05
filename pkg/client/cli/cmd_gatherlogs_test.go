@@ -21,7 +21,7 @@ func Test_gatherLogsZipFiles(t *testing.T) {
 	type testcase struct {
 		name string
 		// We use these two slices so it's easier to write tests knowing which
-		// files are exptected to exist and which aren't. These slices are combined
+		// files are expected to exist and which aren't. These slices are combined
 		// prior to calling zipFiles in the tests.
 		realFileNames []string
 		fakeFileNames []string
@@ -226,6 +226,8 @@ func Test_gatherLogsNoK8s(t *testing.T) {
 			}
 			stdout := dlog.StdLogger(ctx, dlog.LogLevelInfo).Writer()
 			stderr := dlog.StdLogger(ctx, dlog.LogLevelError).Writer()
+			cmd.SetOut(stdout)
+			cmd.SetErr(stderr)
 			gl := &gatherLogsArgs{
 				outputFile: tc.outputFile,
 				daemons:    tc.daemons,
@@ -236,7 +238,7 @@ func Test_gatherLogsNoK8s(t *testing.T) {
 			}
 
 			// Ensure we can create a zip of the logs
-			err := gl.gatherLogs(ctx, cmd, stdout, stderr)
+			err := gl.gatherLogs(ctx, cmd)
 			if tc.errMsg != "" {
 				require.Error(t, err)
 				assert.Contains(t, err.Error(), tc.errMsg)
@@ -372,10 +374,8 @@ func Test_gatherLogsAnonymizeLogs(t *testing.T) {
 		},
 	}
 
-	ctx := dlog.NewTestContext(t, false)
 	testLogDir := "testdata/testLogDir"
 	outputDir := t.TempDir()
-	stdout := dlog.StdLogger(ctx, dlog.LogLevelInfo).Writer()
 	files := []string{"echo-auto-inject-6496f77cbd-n86nc", "traffic-manager-5c69859f94-g4ntj"}
 	for _, file := range files {
 		// The anonymize function edits files in place
@@ -385,7 +385,7 @@ func Test_gatherLogsAnonymizeLogs(t *testing.T) {
 		err := copyFiles(dstFile, srcFile)
 		require.NoError(t, err)
 
-		err = anonymizeLog(stdout, dstFile, anonymizer)
+		err = anonymizeLog(dstFile, anonymizer)
 		require.NoError(t, err)
 
 		// Now verify things have actually been anonymized
@@ -426,7 +426,7 @@ func Test_gatherLogsSignificantPodNames(t *testing.T) {
 			},
 		},
 		{
-			name:    "unkownName",
+			name:    "unknownName",
 			podName: "notarealname",
 			results: []string{},
 		},

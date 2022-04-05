@@ -8,9 +8,16 @@ import (
 	"github.com/spf13/cobra"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+<<<<<<< HEAD
 	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
 	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+=======
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/cli/cliutil"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/commands"
+>>>>>>> upstream/release/v2
 )
 
 func getRemoteCommands(ctx context.Context) (groups cliutil.CommandGroups, err error) {
@@ -19,10 +26,19 @@ func getRemoteCommands(ctx context.Context) (groups cliutil.CommandGroups, err e
 		if err != nil {
 			return fmt.Errorf("unable to call ListCommands: %w", err)
 		}
-		groups, err = cliutil.RPCToCommands(remote, runRemote)
-		return err
+		if groups, err = cliutil.RPCToCommands(remote, runRemote); err != nil {
+			groups = commands.GetCommandsForLocal(err)
+		}
+		userDaemonRunning = true
+		return nil
 	})
-	return
+	if err != nil && err != cliutil.ErrNoUserDaemon {
+		return nil, err
+	}
+	if !userDaemonRunning {
+		groups = commands.GetCommandsForLocal(err)
+	}
+	return groups, nil
 }
 
 func runRemote(cmd *cobra.Command, _ []string) error {

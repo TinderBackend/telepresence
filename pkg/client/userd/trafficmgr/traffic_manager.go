@@ -19,6 +19,7 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 	core "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/types"
 
 	"github.com/TinderBackend/telepresence/rpc/v2/connector"
 	rpc "github.com/TinderBackend/telepresence/rpc/v2/connector"
@@ -70,7 +71,9 @@ type Session interface {
 	ManagerClient() manager.ManagerClient
 	GetCurrentNamespaces(forClientAccess bool) []string
 	ActualNamespace(string) string
+	RemainWithToken(context.Context) error
 	AddNamespaceListener(k8s.NamespaceListener)
+	GatherLogs(context.Context, *connector.LogsRequest) (*connector.LogsResponse, error)
 }
 
 type Service interface {
@@ -102,6 +105,9 @@ type TrafficManager struct {
 
 	// manager client
 	managerClient manager.ManagerClient
+
+	// manager client connection
+	managerConn *grpc.ClientConn
 
 	// search paths are propagated to the rootDaemon
 	rootDaemon daemon.DaemonClient
@@ -192,7 +198,14 @@ func NewSession(c context.Context, sr *scout.Reporter, cr *rpc.ConnectRequest, s
 
 	// Must call SetManagerClient before calling daemon.Connect which tells the
 	// daemon to use the proxy.
-	svc.SetManagerClient(tmgr.managerClient)
+	var opts []grpc.CallOption
+	cfg := client.GetConfig(c)
+	if !cfg.Grpc.MaxReceiveSize.IsZero() {
+		if mz, ok := cfg.Grpc.MaxReceiveSize.AsInt64(); ok {
+			opts = append(opts, grpc.MaxCallRecvMsgSize(int(mz)))
+		}
+	}
+	svc.SetManagerClient(tmgr.managerClient, opts...)
 
 	// Tell daemon what it needs to know in order to establish outbound traffic to the cluster
 	oi := tmgr.getOutboundInfo(c)
@@ -241,6 +254,21 @@ func NewSession(c context.Context, sr *scout.Reporter, cr *rpc.ConnectRequest, s
 		Intercepts:     &manager.InterceptInfoSnapshot{Intercepts: tmgr.getCurrentIntercepts()},
 	}
 	return tmgr, ret
+}
+
+func (tm *TrafficManager) RemainWithToken(ctx context.Context) error {
+	tok, err := tm.getCloudAPIKey(ctx, a8rcloud.KeyDescTrafficManager, false)
+	if err != nil {
+		return fmt.Errorf("failed to get api key: %w", err)
+	}
+	_, err = tm.managerClient.Remain(ctx, &manager.RemainRequest{
+		Session: tm.session(),
+		ApiKey:  tok,
+	})
+	if err != nil {
+		return fmt.Errorf("error calling Remain: %w", err)
+	}
+	return nil
 }
 
 func (tm *TrafficManager) ManagerClient() manager.ManagerClient {
@@ -356,6 +384,7 @@ func connectMgr(c context.Context, cluster *k8s.Cluster, installID string, svc S
 		userAndHost:     userAndHost,
 		getCloudAPIKey:  svc.LoginExecutor().GetCloudAPIKey,
 		managerClient:   mClient,
+		managerConn:     conn,
 		sessionInfo:     si,
 		rootDaemon:      rootDaemon,
 		localIntercepts: map[string]string{},
@@ -443,7 +472,7 @@ func (tm *TrafficManager) getInfosForWorkloads(
 	aMap map[string]*manager.AgentInfo,
 	filter rpc.ListRequest_Filter,
 ) ([]*rpc.WorkloadInfo, error) {
-	wis := make([]*rpc.WorkloadInfo, 0)
+	wiMap := make(map[types.UID]*rpc.WorkloadInfo)
 	var err error
 	tm.wlWatcher.eachService(ctx, namespaces, func(svc *core.Service) {
 		var wls []k8sapi.Workload
@@ -451,6 +480,9 @@ func (tm *TrafficManager) getInfosForWorkloads(
 			return
 		}
 		for _, workload := range wls {
+			if _, ok := wiMap[workload.GetUID()]; ok {
+				continue
+			}
 			name := workload.GetName()
 			dlog.Debugf(ctx, "Getting info for %s %s.%s, matching service %s.%s", workload.GetKind(), name, workload.GetNamespace(), svc.Name, svc.Namespace)
 			ports := []*rpc.WorkloadInfo_ServiceReference_Port{}
@@ -481,11 +513,17 @@ func (tm *TrafficManager) getInfosForWorkloads(
 			if !ok && filter <= rpc.ListRequest_INSTALLED_AGENTS {
 				continue
 			}
-			wis = append(wis, wlInfo)
+			wiMap[workload.GetUID()] = wlInfo
 		}
 	})
-	sort.Slice(wis, func(i, j int) bool { return wis[i].Name < wis[j].Name })
-	return wis, nil
+	wiz := make([]*rpc.WorkloadInfo, len(wiMap))
+	i := 0
+	for _, wi := range wiMap {
+		wiz[i] = wi
+		i++
+	}
+	sort.Slice(wiz, func(i, j int) bool { return wiz[i].Name < wiz[j].Name })
+	return wiz, nil
 }
 
 func (tm *TrafficManager) WatchWorkloads(c context.Context, wr *rpc.WatchWorkloadsRequest, stream WatchWorkloadsStream) error {
@@ -520,11 +558,33 @@ func (tm *TrafficManager) WorkloadInfoSnapshot(
 	tm.WaitForNSSync(ctx)
 	tm.wlWatcher.waitForSync(ctx)
 
-	nss := make([]string, 0, len(namespaces))
-	for _, ns := range namespaces {
-		ns = tm.ActualNamespace(ns)
-		if ns != "" {
-			nss = append(nss, ns)
+	is := tm.getCurrentIntercepts()
+
+	var nss []string
+	if filter == rpc.ListRequest_INTERCEPTS {
+		// Special case, we don't care about namespaces. Instead, we use the namespaces of all
+		// intercepts.
+		nsMap := make(map[string]struct{})
+		for _, i := range is {
+			nsMap[i.Spec.Namespace] = struct{}{}
+		}
+		for _, ns := range tm.localIntercepts {
+			nsMap[ns] = struct{}{}
+		}
+		nss = make([]string, len(nsMap))
+		i := 0
+		for ns := range nsMap {
+			nss[i] = ns
+			i++
+		}
+		sort.Strings(nss) // sort them so that the result is predictable
+	} else {
+		nss = make([]string, 0, len(namespaces))
+		for _, ns := range namespaces {
+			ns = tm.ActualNamespace(ns)
+			if ns != "" {
+				nss = append(nss, ns)
+			}
 		}
 	}
 	if len(nss) == 0 {
@@ -532,7 +592,6 @@ func (tm *TrafficManager) WorkloadInfoSnapshot(
 		return &rpc.WorkloadInfoSnapshot{}, nil
 	}
 
-	is := tm.getCurrentIntercepts()
 	iMap := make(map[string]*manager.InterceptInfo, len(is))
 nextIs:
 	for _, i := range is {
@@ -574,12 +633,23 @@ nextIs:
 
 func (tm *TrafficManager) remain(c context.Context) error {
 	ticker := time.NewTicker(5 * time.Second)
-	defer ticker.Stop()
+	defer func() {
+		ticker.Stop()
+		c = dcontext.WithoutCancel(c)
+		c, cancel := context.WithTimeout(c, 3*time.Second)
+		defer cancel()
+		if err := tm.clearIntercepts(c); err != nil {
+			dlog.Errorf(c, "failed to clear intercepts: %v", err)
+		}
+		if _, err := tm.managerClient.Depart(c, tm.session()); err != nil {
+			dlog.Errorf(c, "failed to depart from manager: %v", err)
+		}
+		tm.managerConn.Close()
+	}()
+
 	for {
 		select {
 		case <-c.Done():
-			_ = tm.clearIntercepts(dcontext.WithoutCancel(c))
-			_, _ = tm.managerClient.Depart(dcontext.WithoutCancel(c), tm.session())
 			return nil
 		case <-ticker.C:
 			_, err := tm.managerClient.Remain(c, &manager.RemainRequest{

@@ -356,7 +356,7 @@ func checkMountCapability(ctx context.Context) error {
 		return errors.New("sshfs is not installed on your local machine")
 	}
 
-	// OSXFUSE changed to macFUSE and we've noticed that older versions of OSXFUSE
+	// OSXFUSE changed to macFUSE, and we've noticed that older versions of OSXFUSE
 	// can cause browsers to hang + kernel crashes, so we add an error to prevent
 	// our users from running into this problem.
 	// OSXFUSE isn't included in the output of sshfs -V in versions of 4.0.0 so
@@ -500,7 +500,7 @@ func makeIngressInfo(ingressHost string, ingressPort int32, ingressTLS bool, ing
 			ingress.Port = ingressPort
 			ingress.UseTls = ingressTLS
 
-			if ingress.L5Host == "" { // if L5Host is not present
+			if ingressL5 == "" { // if L5Host is not present
 				ingress.L5Host = ingressHost
 				return ingress, nil
 			} else { // if L5Host is present
@@ -564,7 +564,6 @@ func (is *interceptState) createAndValidateRequest(ctx context.Context) (*connec
 	// if any of the ingress flags are present, skip the ingress dialogue and use flag values
 	if args.previewEnabled {
 		spec := args.previewSpec
-
 		if spec.Ingress == nil && (args.ingressHost != "" || args.ingressPort != 0 || args.ingressTLS || args.ingressL5 != "") {
 			ingress, err := makeIngressInfo(args.ingressHost, args.ingressPort, args.ingressTLS, args.ingressL5)
 			if err != nil {
@@ -572,7 +571,8 @@ func (is *interceptState) createAndValidateRequest(ctx context.Context) (*connec
 			}
 			spec.Ingress = ingress
 		}
-	} else if needLogin {
+	}
+	if needLogin {
 		if err := is.canInterceptAndLogIn(ctx, ir, needLogin); err != nil {
 			return nil, err
 		}

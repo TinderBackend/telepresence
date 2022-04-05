@@ -13,10 +13,18 @@ import (
 	"google.golang.org/grpc/status"
 	empty "google.golang.org/protobuf/types/known/emptypb"
 
+<<<<<<< HEAD
 	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
 	"github.com/TinderBackend/telepresence/v2/pkg/client"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/TinderBackend/telepresence/v2/pkg/proc"
+=======
+	"github.com/TinderBackend/telepresence/rpc/v2/daemon"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+	"github.com/TinderBackend/telepresence/v2/pkg/proc"
+>>>>>>> upstream/release/v2
 )
 
 var ErrNoNetwork = errors.New("telepresence network is not established")
@@ -45,11 +53,10 @@ func launchDaemon(ctx context.Context) error {
 		_ = fh.Close()
 	}
 
-	configDir, err := filelocation.AppUserConfigDir(ctx)
+	configDir, err := ensureAppUserConfigDir(ctx)
 	if err != nil {
 		return err
 	}
-
 	return proc.StartInBackgroundAsRoot(ctx, client.GetExe(), "daemon-foreground", logDir, configDir)
 }
 
@@ -107,7 +114,7 @@ func withNetwork(ctx context.Context, maybeStart bool, fn func(context.Context, 
 	daemonClient := daemon.NewDaemonClient(conn)
 	if !started {
 		// Ensure that the already running daemon has the correct version
-		if err := versionCheck(ctx, "Root", "", daemonClient); err != nil {
+		if err := versionCheck(ctx, "Root", "", false, daemonClient); err != nil {
 			return err
 		}
 	}
@@ -170,4 +177,15 @@ func Disconnect(ctx context.Context, quitUserDaemon, quitRootDaemon bool) (err e
 		err = nil
 	}
 	return err
+}
+
+func ensureAppUserConfigDir(ctx context.Context) (string, error) {
+	configDir, err := filelocation.AppUserConfigDir(ctx)
+	if err != nil {
+		return "", errcat.NoDaemonLogs.New(err)
+	}
+	if err = os.MkdirAll(configDir, 0700); err != nil {
+		return "", errcat.NoDaemonLogs.Newf("unable to ensure that config directory %q exists: %w", configDir, err)
+	}
+	return configDir, nil
 }

@@ -4,16 +4,14 @@
 package watchable_test
 
 import (
-	"context"
-	"encoding/json"
-	"testing"
-	"time"
+  "context"
+  "encoding/json"
+  "testing"
+  "time"
 
-	"github.com/stretchr/testify/assert"
-
-	"VALPKG"
-	"github.com/datawire/dlib/dlog"
-	"github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/watchable"
+  "github.com/TinderBackend/telepresence/v2/cmd/traffic/cmd/manager/internal/watchable"
+  "github.com/datawire/dlib/dlog"
+  "github.com/stretchr/testify/assert"
 )
 
 func assertMAPTYPESnapshotEqual(t *testing.T, expected, actual watchable.MAPTYPESnapshot, msgAndArgs ...interface{}) bool {
@@ -249,7 +247,7 @@ func TestMAPTYPE_Subscribe(t *testing.T) {
 		},
 		snapshot)
 
-	// Check that deletes work with LoadAndDlete
+	// Check that deletes work with LoadAndDelete
 	m.LoadAndDelete("b")
 	snapshot, ok = <-ch
 	assert.True(t, ok)

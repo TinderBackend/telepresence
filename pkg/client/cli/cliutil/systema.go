@@ -1,7 +1,6 @@
 package cliutil
 
 import (
-	"bufio"
 	"context"
 	"errors"
 	"fmt"
@@ -12,6 +11,7 @@ import (
 	"runtime"
 	"strings"
 
+	"google.golang.org/grpc"
 	grpcCodes "google.golang.org/grpc/codes"
 	grpcStatus "google.golang.org/grpc/status"
 	empty "google.golang.org/protobuf/types/known/emptypb"
@@ -23,10 +23,20 @@ import (
 	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
 	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
 	"github.com/datawire/dlib/dexec"
+<<<<<<< HEAD
+=======
+	"github.com/datawire/dlib/dlog"
+	"github.com/TinderBackend/telepresence/rpc/v2/connector"
+	"github.com/TinderBackend/telepresence/v2/pkg/client"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/errcat"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/scout"
+	"github.com/TinderBackend/telepresence/v2/pkg/client/userd/auth/authdata"
+	"github.com/TinderBackend/telepresence/v2/pkg/filelocation"
+>>>>>>> upstream/release/v2
 )
 
 // EnsureLoggedIn ensures that the user is logged in to Ambassador Cloud.  An error is returned if
-// login fails.  The result code will indicate if this is a new login or if it resued an existing
+// login fails.  The result code will indicate if this is a new login or if it re-used an existing
 // login.  If the `apikey` argument is empty an interactive login is performed; if it is non-empty
 // the key is used instead of performing an interactive login.
 func EnsureLoggedIn(ctx context.Context, apikey string) (connector.LoginResult_Code, error) {
@@ -127,7 +137,7 @@ func GetCloudAPIKey(ctx context.Context, description string, autoLogin bool) (st
 	return keyData.GetApiKey(), nil
 }
 
-// GetCloudLicense communicates with system a to get the jwt version of the
+// GetCloudLicense communicates with System A to get the jwt version of the
 // license, puts it in a kubernetes secret, and then writes that secret to the
 // output file for the user to apply to their cluster
 func GetCloudLicense(ctx context.Context, outputFile, id string) (string, string, error) {
@@ -145,104 +155,76 @@ func GetCloudLicense(ctx context.Context, outputFile, id string) (string, string
 	return licenseData.GetLicense(), licenseData.GetHostDomain(), nil
 }
 
+func telProBinary(ctx context.Context) (string, error) {
+	cfg := client.GetConfig(ctx)
+	if cfg.Daemons.UserDaemonBinary != "" {
+		return cfg.Daemons.UserDaemonBinary, nil
+	}
+	dir, err := filelocation.AppUserConfigDir(ctx)
+	if err != nil {
+		return "", errcat.NoDaemonLogs.Newf("unable to get path to config files: %w", err)
+	}
+
+	telProLocation := filepath.Join(dir, "telepresence-pro")
+	if runtime.GOOS == "windows" {
+		telProLocation += ".exe"
+	}
+	return telProLocation, nil
+}
+
+func checkProVersion(ctx context.Context, telProLocation string) (bool, error) {
+	proCmd := dexec.CommandContext(ctx, telProLocation, "pro-version")
+	proCmd.DisableLogging = true
+	output, err := proCmd.CombinedOutput()
+	if err != nil {
+		return false, errcat.NoDaemonLogs.Newf("Unable to get telepresence pro version: %w", err)
+	}
+	return strings.Contains(string(output), client.Version()), nil
+}
+
 // GetTelepresencePro prompts the user to optionally install Telepresence Pro
 // if it isn't installed. If the user installs it, it also asks the user to
 // automatically update their configuration to use the new binary.
-func GetTelepresencePro(ctx context.Context) error {
-	dir, err := filelocation.AppUserConfigDir(ctx)
-	if err != nil {
-		return errcat.NoDaemonLogs.Newf("unable to get path to config files: %w", err)
+func GetTelepresencePro(ctx context.Context) (err error) {
+	sc := scout.NewReporter(ctx, "cli")
+	sc.Start(ctx)
+	defer sc.Close()
+
+	defer func() {
+		switch {
+		case err != nil:
+			sc.Report(ctx, "pro_connector_upgrade_fail", scout.Entry{Key: "error", Value: err.Error()})
+		default:
+			sc.Report(ctx, "pro_connector_upgrade_success")
+		}
+	}()
+
+	var telProLocation string
+	if telProLocation, err = telProBinary(ctx); err != nil {
+		return err
 	}
 
-	// If telepresence-pro doesn't exist, then we should ask the user
-	// if they want to install it
-	telProLocation := filepath.Join(dir, "telepresence-pro")
-	if _, err := os.Stat(telProLocation); os.IsNotExist(err) {
-		reader := bufio.NewReader(os.Stdin)
-		fmt.Printf("Telepresence Pro is recommended when using login features, can Telepresence install it? (y/n)")
-		reply, err := reader.ReadString('\n')
-		if err != nil {
-			return errcat.User.Newf("error reading input: %w", err)
-		}
-
-		// If the user doesn't want to install it, then we we'll proceed
-		// with launching the daemon normally
-		reply = strings.TrimSpace(reply)
-		if reply != "y" {
-			return nil
-		}
-
-		err = installTelepresencePro(ctx, telProLocation)
-		if err != nil {
+	if _, err := os.Stat(telProLocation); err != nil {
+		if !os.IsNotExist(err) {
 			return err
 		}
-
-		// Ask the user if they want to automatically update their config
-		// with the telepresence-pro binary.
-		// TODO: This will remove any comments that exist in the config file
-		// which it's yaml so that's _fine_ but it would be nice if we didn't
-		// do that.
-		fmt.Printf("Update your Telepresence config to use Telepresence Pro? (y/n)")
-		reply, err = reader.ReadString('\n')
-		if err != nil {
-			return errcat.User.Newf("error reading input: %w", err)
-		}
-		reply = strings.TrimSpace(reply)
-		if reply != "y" {
-			return nil
-		}
-		err = updateConfig(ctx, telProLocation)
-		if err != nil {
-			return err
-		}
+		sc.SetMetadatum(ctx, "first_install", true)
 	} else {
 		// If the binary is present, we check its version to ensure it's compatible
 		// with the CLI
-		proCmd := dexec.CommandContext(ctx, telProLocation, "pro-version")
-		proCmd.DisableLogging = true
-
-		output, err := proCmd.CombinedOutput()
+		ok, err := checkProVersion(ctx, telProLocation)
 		if err != nil {
-			return errcat.NoDaemonLogs.Newf("Unable to get telepresence pro version")
+			return err
 		}
-
-		if !strings.Contains(string(output), client.Version()) {
-			reader := bufio.NewReader(os.Stdin)
-			fmt.Printf("Telepresence Pro needs to be upgraded to work with CLI version %s, allow Telepresence to upgrade it? (y/n)",
-				client.Version())
-			reply, err := reader.ReadString('\n')
-			if err != nil {
-				return errcat.NoDaemonLogs.Newf("error reading input: %w", err)
-			}
-
-			// If the user doesn't want to install it, then we we'll proceed
-			// with launching the daemon normally
-			reply = strings.TrimSpace(reply)
-			if reply != "y" {
-				return nil
-			}
-			err = os.Remove(telProLocation)
-			if err != nil {
-				return errcat.NoDaemonLogs.Newf("error removing Telepresence Pro: %w", err)
-			}
-			// Since we've already asked the user for permission to upgrade,
-			// we can run these functions without asking permission again.
-			err = installTelepresencePro(ctx, telProLocation)
-			if err != nil {
-				return errcat.NoDaemonLogs.Newf("error installing updated Telepresence Pro: %w",
-					err)
-			}
-
-			// The users configuration is most likely correct if they are upgrading,
-			// but we update it just to be extra sure.
-			err = updateConfig(ctx, telProLocation)
-			if err != nil {
-				return errcat.NoDaemonLogs.Newf("error updating config: %w",
-					err)
-			}
+		if ok {
+			return nil
 		}
 	}
-	return nil
+
+	if err = installTelepresencePro(ctx, telProLocation); err != nil {
+		return errcat.NoDaemonLogs.Newf("error installing updated enhanced free client: %w", err)
+	}
+	return updateConfig(ctx, telProLocation)
 }
 
 // installTelepresencePro installs the binary. Users should be asked for
@@ -253,9 +235,10 @@ func installTelepresencePro(ctx context.Context, telProLocation string) error {
 	// daemon versions need to match
 	clientVersion := strings.Trim(client.Version(), "v")
 	systemAHost := client.GetConfig(ctx).Cloud.SystemaHost
-	installString := fmt.Sprintf("https://%s/download/tel-pro/%s/%s/%s/latest/telepresence-pro", systemAHost, runtime.GOOS, runtime.GOARCH, clientVersion)
+	downloadURL := fmt.Sprintf("https://%s/download/tel-pro/%s/%s/%s/latest/%s",
+		systemAHost, runtime.GOOS, runtime.GOARCH, clientVersion, filepath.Base(telProLocation))
 
-	resp, err := http.Get(installString)
+	resp, err := http.Get(downloadURL)
 	if err == nil {
 		defer resp.Body.Close()
 		if resp.StatusCode != http.StatusOK {
@@ -263,21 +246,70 @@ func installTelepresencePro(ctx context.Context, telProLocation string) error {
 		}
 	}
 	if err != nil {
-		return errcat.NoDaemonLogs.Newf("unable to download Telepresence Pro: %w", err)
+		return errcat.NoDaemonLogs.Newf("unable to download the enhanced free client: %w", err)
 	}
 
-	out, err := os.Create(telProLocation)
+	// Disconnect before attempting to create the new file.
+	wasRunning := false
+	err = WithStartedConnector(ctx, false, func(ctx context.Context, connectorClient connector.ConnectorClient) error {
+		wasRunning = true
+		_, err := connectorClient.Quit(ctx, &empty.Empty{})
+		return err
+	})
+	if err != nil && err != ErrNoUserDaemon {
+		return err
+	}
+	replaceConnectorConn(ctx, nil)
+
+	if err = downloadProDaemon("the enhanced free client", resp.Body, telProLocation); err != nil {
+		return err
+	}
+	if wasRunning {
+		// relaunch the connector
+		var conn *grpc.ClientConn
+		if conn, err = launchConnectorDaemon(ctx, telProLocation, true); err != nil {
+			return err
+		}
+		replaceConnectorConn(ctx, conn)
+	}
+	return nil
+}
+
+// downloadProDaemon copies the 'from' stream into a temporary file in the same directory as the
+// designated binary, chmods it to be executable, removes the old binary, and then renames the
+// temporary file as the new binary
+func downloadProDaemon(downloadURL string, from io.Reader, telProLocation string) (err error) {
+	dir := filepath.Dir(telProLocation)
+	name := filepath.Base(telProLocation)
+	var tmp *os.File
+	if tmp, err = os.CreateTemp(dir, name); err != nil {
+		return errcat.NoDaemonLogs.Newf("unable to create temporary file in %q: %w", dir, err)
+	}
+	tmpName := tmp.Name()
+
+	// Remove temp file if it still exists when we exit this function
+	defer func() {
+		if err != nil {
+			_ = os.Remove(tmpName)
+		}
+	}()
+
+	// Perform the actual download
+	fmt.Printf("Downloading %s...", downloadURL)
+	_, err = io.Copy(tmp, from)
+	_ = tmp.Close() // Important to close here. Don't defer this one
 	if err != nil {
-		return errcat.NoDaemonLogs.Newf("unable to create file %q for Telepresence Pro: %w", telProLocation, err)
+		return errcat.NoDaemonLogs.Newf("unable to download the enhanced free client: %w", err)
 	}
-	defer out.Close()
-
-	if _, err = io.Copy(out, resp.Body); err != nil {
-		return errcat.NoDaemonLogs.Newf("unable to copy Telepresence Pro to %q: %w", telProLocation, err)
-	}
-
-	if err = os.Chmod(telProLocation, 0755); err != nil {
+	fmt.Println("done")
+	if err = os.Chmod(tmpName, 0755); err != nil {
 		return errcat.NoDaemonLogs.Newf("unable to set permissions of %q to 755: %w", telProLocation, err)
+	}
+	if err = os.Remove(telProLocation); err != nil && !os.IsNotExist(err) {
+		return errcat.NoDaemonLogs.Newf("error removing %q: %w", telProLocation, err)
+	}
+	if err = os.Rename(tmpName, telProLocation); err != nil {
+		return errcat.NoDaemonLogs.Newf("error renaming %q to %q: %w", tmpName, telProLocation, err)
 	}
 	return nil
 }
@@ -286,19 +318,32 @@ func installTelepresencePro(ctx context.Context, telProLocation string) error {
 // telProLocation. Users should be asked for permission before this is done.
 func updateConfig(ctx context.Context, telProLocation string) error {
 	cfg := client.GetConfig(ctx)
-	cfg.Daemons.UserDaemonBinary = telProLocation
+	if cfg.Daemons.UserDaemonBinary == telProLocation {
+		return nil
+	}
 
+	cfgFile := client.GetConfigFile(ctx)
+	if cfg.Daemons.UserDaemonBinary == "" {
+		dlog.Infof(ctx, "Updating %s, setting Daemons.UserDaemonBinary to %s", cfgFile, telProLocation)
+	} else {
+		dlog.Infof(ctx, "Updating %s, changing Daemons.UserDaemonBinary from %s to %s", cfgFile, cfg.Daemons.UserDaemonBinary, telProLocation)
+	}
+
+	cfg.Daemons.UserDaemonBinary = telProLocation
 	b, err := yaml.Marshal(cfg)
 	if err != nil {
 		return errcat.NoDaemonLogs.Newf("error marshaling updating config: %w", err)
 	}
-	cfgFile := client.GetConfigFile(ctx)
-	_, err = os.OpenFile(cfgFile, os.O_CREATE|os.O_WRONLY, 0644)
+	if s, err := os.Stat(cfgFile); err == nil && s.Size() > 0 {
+		_ = os.Rename(cfgFile, cfgFile+".bak")
+	}
+
+	f, err := os.OpenFile(cfgFile, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return errcat.NoDaemonLogs.Newf("error opening config file: %w", err)
 	}
-	err = os.WriteFile(cfgFile, b, 0644)
-	if err != nil {
+	defer f.Close()
+	if _, err = f.Write(b); err != nil {
 		return errcat.NoDaemonLogs.Newf("error writing config file: %w", err)
 	}
 	return nil

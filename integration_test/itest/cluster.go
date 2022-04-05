@@ -151,6 +151,11 @@ func (s *cluster) ensureExecutable(ctx context.Context, errs chan<- error, wg *s
 		errs <- err
 		return
 	}
+	defer func() {
+		if err := Run(ctx, "git", "restore", filepath.Join("pkg", "install", "helm", "telepresence-chart.tgz")); err != nil {
+			errs <- err
+		}
+	}()
 
 	exe := "telepresence"
 	if runtime.GOOS == "windows" {
@@ -198,7 +203,7 @@ func (s *cluster) ensureDockerImage(ctx context.Context, errs chan<- error, wg *
 	wgs.Add(1)
 	go func() {
 		defer wgs.Done()
-		runMake("image")
+		runMake("tel2")
 	}()
 	wgs.Wait()
 
@@ -226,7 +231,7 @@ func (s *cluster) ensureCluster(ctx context.Context, wg *sync.WaitGroup) {
 }
 
 func (s *cluster) withBasicConfig(c context.Context, t *testing.T) context.Context {
-	config := client.GetDefaultConfig(c)
+	config := client.GetDefaultConfig()
 	config.LogLevels.UserDaemon = logrus.DebugLevel
 	config.LogLevels.RootDaemon = logrus.DebugLevel
 
@@ -243,8 +248,8 @@ func (s *cluster) withBasicConfig(c context.Context, t *testing.T) context.Conte
 	to.PrivateTrafficManagerConnect = 180 * time.Second
 
 	registry := s.Registry()
-	config.Images.Registry = registry
-	config.Images.WebhookRegistry = registry
+	config.Images.PrivateRegistry = registry
+	config.Images.PrivateWebhookRegistry = registry
 
 	config.Grpc.MaxReceiveSize, _ = resource.ParseQuantity("10Mi")
 	config.Cloud.SystemaHost = "127.0.0.1"
@@ -435,7 +440,7 @@ func KubeConfig(ctx context.Context) string {
 // WithEnv() function
 func Command(ctx context.Context, executable string, args ...string) *dexec.Cmd {
 	getT(ctx).Helper()
-	// Ensure that command has timestamp and is somewhat readable
+	// Ensure that command has a timestamp and is somewhat readable
 	dlog.Debug(ctx, "executing ", shellquote.ShellString(filepath.Base(executable), args))
 	cmd := dexec.CommandContext(ctx, executable, args...)
 	cmd.DisableLogging = true

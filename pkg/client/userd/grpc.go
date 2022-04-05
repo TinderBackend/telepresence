@@ -148,8 +148,8 @@ func scoutInterceptEntries(spec *manager.InterceptSpec, result *rpc.InterceptRes
 	var msg string
 	if result != nil {
 		entries = append(entries,
-			scout.Entry{Key: "service_uid", Value: len(result.ServiceUid)},
-			scout.Entry{Key: "workload_kind", Value: len(result.WorkloadKind)},
+			scout.Entry{Key: "service_uid", Value: result.ServiceUid},
+			scout.Entry{Key: "workload_kind", Value: result.WorkloadKind},
 		)
 		if result.Error != rpc.InterceptError_UNSPECIFIED {
 			msg = result.Error.String()
@@ -281,6 +281,19 @@ func (s *service) UserNotifications(_ *empty.Empty, stream rpc.Connector_UserNot
 
 func (s *service) Login(ctx context.Context, req *rpc.LoginRequest) (result *rpc.LoginResult, err error) {
 	s.logCall(ctx, "Login", func(c context.Context) {
+		defer func() {
+			if err == nil && result.Code == rpc.LoginResult_NEW_LOGIN_SUCCEEDED {
+				s.sessionLock.RLock()
+				defer s.sessionLock.RUnlock()
+				if s.session != nil {
+					dlog.Debug(ctx, "Calling remain with new api key")
+					err := s.session.RemainWithToken(ctx)
+					if err != nil {
+						dlog.Warnf(ctx, "Failed to call remain after login: %v", err)
+					}
+				}
+			}
+		}()
 		if apikey := req.GetApiKey(); apikey != "" {
 			var newLogin bool
 			if newLogin, err = s.loginExecutor.LoginAPIKey(ctx, apikey); err != nil {
@@ -363,6 +376,14 @@ func (s *service) GetIngressInfos(c context.Context, _ *empty.Empty) (result *rp
 		if iis, err = session.IngressInfos(c); err == nil {
 			result = &rpc.IngressInfos{IngressInfos: iis}
 		}
+		return err
+	})
+	return
+}
+
+func (s *service) GatherLogs(ctx context.Context, request *rpc.LogsRequest) (result *rpc.LogsResponse, err error) {
+	err = s.withSession(ctx, "GatherLogs", func(c context.Context, session trafficmgr.Session) error {
+		result, err = session.GatherLogs(c, request)
 		return err
 	})
 	return

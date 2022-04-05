@@ -23,9 +23,9 @@ func init() {
 			Version = "(unknown version)"
 		}
 		if _, err := semver.ParseTolerant(Version); err != nil {
-			if Version != "(devel)" && Version != "(unknown version)" {
+			if Version != "" && Version != "(devel)" && Version != "(unknown version)" {
 				// If this isn't a parsable semver (enforced by Makefile), isn't
-				// "(devel)" (a special value from runtime/debug), and isn't our own
+				// empty, "(devel)" (a special value from runtime/debug), or our own
 				// special "(unknown version)", then something about the toolchain
 				// has clearly changed and invalidated our assumptions.  That's
 				// worthy of a panic; if this is built using an unsupported
@@ -44,9 +44,9 @@ var (
 	structuredOutput semver.Version
 )
 
-// Structured is a structured semver.Version value, and and is based on Version.
+// Structured is a structured semver.Version value, and is based on Version.
 //
-// The reason that this parsed dynamically instead of once at init()-time is so that some of the
+// The reason that this parsed dynamically instead of once at init()-time is so that some
 // unit tests can adjust string Version and see theat reflected in Structured.
 func Structured() semver.Version {
 	// Cache the result to avoid re-doing work.
