@@ -46,7 +46,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '1.17'
-      - uses: azure/setup-kubectl@v1
+      - uses: azure/setup-kubectl@v3
         if: steps.get_last_run.outputs.passed != 'success'
         with:
           version: 'v1.19.3'
@@ -110,7 +110,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '1.17'
-      - uses: azure/setup-kubectl@v1
+      - uses: azure/setup-kubectl@v3
         if: steps.get_last_run.outputs.passed != 'success'
         with:
           version: 'v1.19.3'
@@ -196,7 +196,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '1.17'
-      - uses: azure/setup-kubectl@v1
+      - uses: azure/setup-kubectl@v3
         if: steps.get_last_run.outputs.passed != 'success'
         with:
           version: 'v1.19.3'
